@@ -1,0 +1,35 @@
+{
+  "framework": "crewai",
+  "framework_version": "1.15.18",
+  "adapter_commit": "16060d4",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [
+    "gpt-4o-mini"
+  ],
+  "config": {
+    "experiment": "CR-C crew AML triage",
+    "n": 6
+  },
+  "findings": [
+    {
+      "experiment": "CR-C crew runs end-to-end as a Mission",
+      "metric": "task_accuracy",
+      "native": 1,
+      "with_redevops": 1,
+      "classification": "PARITY",
+      "note": "a real 2-agent crew (analyst\u2192officer, sequential) runs inside the Mission; ReDevOps wraps it without changing what it decides \u2014 the framework's job stays the framework's"
+    },
+    {
+      "experiment": "CR-C evidence-grounding gate",
+      "metric": "grounded_decisions",
+      "native": "(the crew always returns a decision)",
+      "with_redevops": "6/6",
+      "classification": "EXPECTED_IMPLEMENTATION_DIFFERENCE",
+      "note": "every auto-actioned decision must be grounded in the alert's decisive signal; on this clean set all 6 are grounded so none are routed \u2014 the gate bites when a fluent agent decides without support, as the LlamaIndex slice's LI-B shows (6/6 unsupported answers abstained)"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:1c6d8216d26650c5"
+}

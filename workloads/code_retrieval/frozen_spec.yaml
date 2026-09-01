@@ -1,0 +1,86 @@
+# FROZEN pre-registration for the code-retrieval benchmark (Phase 0).
+# Committed BEFORE any arm runs. Nothing downstream reinterprets these definitions; results are scored
+# against exactly this schema. The plugin is NOT scaffolded until the decision gate opens.
+# See docs/plans/code_dependency_retrieval_test_plan.md.
+spec_version: 1
+frozen_at: "2026-08-30"
+status: frozen   # do not edit definitions after the first result exists; bump spec_version + re-freeze instead
+
+hypotheses:
+  H1: "naive semantic/BM25 top-K achieves high MATCH recall but low CLOSURE recall -> patches pass locally, break callers/tests elsewhere."
+  H2: "existing CR (hybrid/DIVER + budget) reaches materially higher closure recall than naive at competitive token cost."
+  H3: "closure_recall predicts resolution better than match_recall (see preregistered_regression)."
+  H3b: "contract_caller_recall predicts resolution AT LEAST AS WELL AS total closure_recall -> the best code context is MINIMUM SUFFICIENT CHANGE closure, not maximum dependency closure; the earned capability is a contract-impact representation, not broad graph expansion."
+
+# The unit of relevance for code is a dependency CLOSURE. Recall is recorded PER CLASS (an aggregate hides
+# the actionable result). A class-level miss names the exact edge a plugin would need.
+dependency_classes:
+  - seed_definition        # the symbol(s) the task is about
+  - direct_caller          # call sites one hop up
+  - transitive_caller      # call sites >=2 hops up (contract ripple)
+  - type_schema            # types/dataclasses/schemas the change touches
+  - import_export          # module surface that must change (re-exports, __all__, public API)
+  - test                   # tests covering the changed symbols
+  - config_build           # manifests/build files/generated-code triggers
+# contract_caller is a labelled SUBSET of {direct_caller + transitive_caller}: call sites that MUST change
+# on a signature/behaviour change. It is the primary candidate predictor (H3b).
+
+resolution_definition: >
+  A task is RESOLVED iff the produced patch applies cleanly to the base commit AND the task's hidden test
+  set passes (and no previously-passing test regresses). Per dataset: own-repo scripted refactors use the
+  declared test(s); SWE-bench Verified uses FAIL_TO_PASS + PASS_TO_PASS.
+
+equal_budget: >
+  All arms run under the SAME (task x model x context-token-budget). The model is fixed across arms
+  (Track-A fairness); only the retrieved/materialized context varies. Budget is a hard cap on materialized
+  context tokens; report results at matched budgets.
+
+arms:
+  - full                       # whole repo (baseline; window overflow)
+  - naive_semantic             # top-K embedding/BM25 chunks
+  - existing_cr                # current Context Runtime, as shipped (NO plugin)
+  - existing_cr_oracle_hints   # CR given seed symbols + required dependency CLASSES, but NOT the files
+  - oracle_closure             # the pre-declared closure as context (upper bound on retrieval)
+# Diagnostic ladder: existing_cr -> existing_cr_oracle_hints -> oracle_closure separates a REPRESENTATION
+# gap (hints rescue it) from a MECHANISM gap (only explicit closure rescues it) from a NON-retrieval
+# bottleneck (even oracle_closure resolves poorly -> agent/model/task execution).
+
+metrics:
+  # recall (per dependency_class) + the subset:
+  - match_recall
+  - closure_recall_total
+  - closure_recall_by_class     # one number per dependency_classes entry
+  - contract_caller_recall
+  # precision / excess (recall is not enough — quantify the cost of over-retrieving):
+  - closure_precision           # fraction of retrieved closure members that are actually required
+  - materialized_token_waste    # tokens spent outside the required closure
+  # end-to-end:
+  - context_efficiency          # selected tokens / full-repo tokens at fixed >=95% required-edge recall (the honest code N x)
+  - resolution_efficiency       # HEADLINE: resolution probability per 1K materialized tokens, subject to required-edge recall
+  - resolution_rate
+  - localization_accuracy       # % edits placed at the correct anchor
+  - completeness                # % of required call sites actually updated in the patch
+  - cost_per_resolved           # tokens / latency / $ per resolved task
+
+preregistered_regression:
+  target: resolution            # binary per task
+  predictors: [match_recall, closure_recall_total, contract_caller_recall]
+  design: "fit each predictor -> resolution under identical task x model x budget; compare predictive power (AUC / partial-R^2 / likelihood-ratio)."
+  claims:
+    H3: "closure_recall_total > match_recall in predictive power"
+    H3b: "contract_caller_recall >= closure_recall_total in predictive power"
+
+decision_gate:   # what Phase 0 decides; the plugin is EARNED, not assumed
+  - condition: "existing_cr: high closure + high resolution at competitive tokens"
+    conclusion: "DO NOT build the plugin."
+  - condition: "match high, closure low, AND closure (or contract-caller) predicts resolution"
+    conclusion: "Build ONLY what the misses justify: broad graph expansion OR (if H3b) narrow contract-impact retrieval."
+  - condition: "closure high but application poor"
+    conclusion: "Retrieval is not the limit -> fix P4 (anchored application / localize-verify loop), not retrieval."
+  - condition: "oracle_closure still resolves poorly"
+    conclusion: "Bottleneck is the agent/model or task execution -> do NOT optimize retrieval."
+
+marketing_constraint: >
+  The 388x (Family 5) is a long-context NEEDLE result and stays out of any code-editing claim until this
+  benchmark runs. The code claim, if earned: "Finding the right file isn't enough — we benchmark whether the
+  runtime retrieves everything the change depends on."

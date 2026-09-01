@@ -1,0 +1,47 @@
+# Refactor FAMILY: type / dataclass field addition, propagated through the CONSTRUCTOR (compat-explicit).
+# The seed is a TYPE (dataclass CapabilitySpec); the caller that must change is a symbol that INSTANTIATES it
+# (`CapabilitySpec(...)`). This is precisely the graph's original blind spot: a call graph that resolves only
+# self.method()/func() edges cannot see an instantiation caller. The family exists to (a) confirm that miss
+# and (b) measure the INSTANTIATES edge extension. Content retrieval can find the builder lexically (it
+# mentions CapabilitySpec); the graph needs the instantiation edge.
+task_id: type_field_add_v1
+family: type_field_instantiation
+repo: agentic-os
+base_commit: f8ce79c
+model: TBD
+context_token_budget: TBD
+
+description: >
+  Add an OPTIONAL `owner: str = ""` field to the `CapabilitySpec` dataclass (capability provenance metadata).
+  The field MUST have a default so existing constructions of CapabilitySpec keep working. Then in the
+  ergonomic builder `capability(...)` in operator_sdk.py, add an optional keyword parameter `owner: str = ""`
+  and pass `owner=owner` where it constructs `CapabilitySpec(...)`. Add a test.
+
+seed_symbols:
+  - "agentic_os.mission.types:CapabilitySpec"
+
+required_closure:
+  seed_definition:
+    - "agentic_os.mission.types:CapabilitySpec"       # add the field
+  direct_caller:
+    - "agentic_os.mission.operator_sdk:capability"     # the builder that INSTANTIATES CapabilitySpec
+  transitive_caller: []
+  type_schema:
+    - "agentic_os.mission.types:CapabilitySpec"        # the field's type lives on the dataclass
+  import_export: []
+  test:
+    - "tests:test_capabilityspec_owner_threaded_by_builder"
+  config_build: []
+
+contract_callers:
+  - "agentic_os.mission.operator_sdk:capability"
+
+creates:
+  - "tests:test_capabilityspec_owner_threaded_by_builder"
+
+resolution:
+  method: pytest
+  targets:
+    - "tests/test_capabilityspec_owner_threaded_by_builder.py"
+  must_not_regress: "tests/test_mission.py tests/test_mission_concurrency.py"
+declaration_hash: "sha256:16fb9e1dae32763840dc81e6ce525ade"

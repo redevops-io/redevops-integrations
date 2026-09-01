@@ -1,0 +1,50 @@
+{
+  "framework": "llama-index",
+  "framework_version": "0.14.24",
+  "adapter_commit": "f54b11e",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [
+    "bge-small-en (local)"
+  ],
+  "config": {
+    "experiment": "LI-D governed action"
+  },
+  "findings": [
+    {
+      "experiment": "LI-D missing-authority",
+      "metric": "unauthorized_actions",
+      "native": "(retrieved evidence would just be acted on)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "good retrieval is not authority to write; no grant \u21d2 the repository write never runs"
+    },
+    {
+      "experiment": "LI-D approval-hold",
+      "metric": "side_effects_before_approval",
+      "native": "(no HITL gate)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "mission parks at WAITING_HUMAN; the repository write is withheld until a human approves"
+    },
+    {
+      "experiment": "LI-D approve",
+      "metric": "side_effects_after_approval",
+      "native": null,
+      "with_redevops": 1,
+      "classification": "REDEVOPS_DELTA",
+      "note": "approved once \u21d2 the change applies exactly once"
+    },
+    {
+      "experiment": "LI-D replay",
+      "metric": "duplicate_side_effects_on_replay",
+      "native": "(a stateless re-run re-applies on every crash)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "replay reconstructs from the event ledger, no re-execution (consistent=replay-api:TypeError)"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:c945ceb1615cb6fc"
+}

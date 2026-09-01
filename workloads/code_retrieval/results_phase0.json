@@ -1,0 +1,938 @@
+{
+  "base_commit": "f8ce79c",
+  "budget_tokens": 4000,
+  "repo": "/mnt/backup/projects/agentic-os",
+  "repo_total_tokens": 240131,
+  "tasks": {
+    "cap_metadata_propagation_v1": {
+      "arms": {
+        "existing_cr": {
+          "closure_precision": 0.2,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 0.5,
+            "import_export": null,
+            "seed_definition": 0.5,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": 0.0
+          },
+          "closure_recall_total": 0.4,
+          "context_efficiency": 0.0146003639680008,
+          "contract_caller_recall": 0.5,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 0.5,
+          "materialized_token_waste": 2131,
+          "materialized_tokens": 3506,
+          "task_id": "cap_metadata_propagation_v1"
+        },
+        "existing_cr_hybrid": {
+          "closure_precision": 0.5714285714285714,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 0.8,
+          "context_efficiency": 0.01447543215994603,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 1.0,
+          "materialized_token_waste": 825,
+          "materialized_tokens": 3476,
+          "task_id": "cap_metadata_propagation_v1"
+        },
+        "existing_cr_hybrid_oracle_hints": {
+          "closure_precision": 0.6666666666666666,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 0.8,
+          "context_efficiency": 0.014038170831754335,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 1.0,
+          "materialized_token_waste": 720,
+          "materialized_tokens": 3371,
+          "task_id": "cap_metadata_propagation_v1"
+        },
+        "existing_cr_oracle_hints": {
+          "closure_precision": 0.18181818181818182,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 0.5,
+            "import_export": null,
+            "seed_definition": 0.5,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": 0.0
+          },
+          "closure_recall_total": 0.4,
+          "context_efficiency": 0.015370776784338548,
+          "contract_caller_recall": 0.5,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 0.5,
+          "materialized_token_waste": 2316,
+          "materialized_tokens": 3691,
+          "task_id": "cap_metadata_propagation_v1"
+        },
+        "full": {
+          "closure_precision": 0.004393673110720563,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 1.0,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 1.0,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 1.0,
+          "materialized_token_waste": 237312,
+          "materialized_tokens": 240131,
+          "task_id": "cap_metadata_propagation_v1"
+        },
+        "graph_closure": {
+          "closure_precision": 0.4444444444444444,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 0.8,
+          "context_efficiency": 0.01597461385660327,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 1.0,
+          "materialized_token_waste": 1185,
+          "materialized_tokens": 3836,
+          "task_id": "cap_metadata_propagation_v1"
+        },
+        "graph_plus_hybrid": {
+          "closure_precision": 0.4444444444444444,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 0.8,
+          "context_efficiency": 0.01597461385660327,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 1.0,
+          "materialized_token_waste": 1185,
+          "materialized_tokens": 3836,
+          "task_id": "cap_metadata_propagation_v1"
+        },
+        "naive_semantic": {
+          "closure_precision": 0.25,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 0.5,
+            "import_export": null,
+            "seed_definition": 0.5,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": 0.0
+          },
+          "closure_recall_total": 0.4,
+          "context_efficiency": 0.014825241222499386,
+          "contract_caller_recall": 0.5,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 0.5,
+          "materialized_token_waste": 2185,
+          "materialized_tokens": 3560,
+          "task_id": "cap_metadata_propagation_v1"
+        },
+        "oracle_closure": {
+          "closure_precision": 1.0,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 1.0,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.011739425563546565,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+          "match_recall": 1.0,
+          "materialized_token_waste": 0,
+          "materialized_tokens": 2819,
+          "task_id": "cap_metadata_propagation_v1"
+        }
+      },
+      "declaration_hash": "sha256:3edfe0fa4508e4f54c38c9aeb430b873",
+      "family": "capability_metadata_propagation"
+    },
+    "signature_change_compat_v1": {
+      "arms": {
+        "existing_cr": {
+          "closure_precision": 0.5,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 0.5,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.3333333333333333,
+          "context_efficiency": 0.005705219234501168,
+          "contract_caller_recall": 0.5,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 0.0,
+          "materialized_token_waste": 531,
+          "materialized_tokens": 1370,
+          "task_id": "signature_change_compat_v1"
+        },
+        "existing_cr_hybrid": {
+          "closure_precision": 0.5,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.007541716812906289,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 0.0,
+          "materialized_token_waste": 804,
+          "materialized_tokens": 1811,
+          "task_id": "signature_change_compat_v1"
+        },
+        "existing_cr_hybrid_oracle_hints": {
+          "closure_precision": 0.5,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.007541716812906289,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 0.0,
+          "materialized_token_waste": 804,
+          "materialized_tokens": 1811,
+          "task_id": "signature_change_compat_v1"
+        },
+        "existing_cr_oracle_hints": {
+          "closure_precision": 0.5,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.010948190779199687,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 0.0,
+          "materialized_token_waste": 1622,
+          "materialized_tokens": 2629,
+          "task_id": "signature_change_compat_v1"
+        },
+        "full": {
+          "closure_precision": 0.0026362038664323375,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 1.0,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 1.0,
+          "materialized_token_waste": 238238,
+          "materialized_tokens": 240131,
+          "task_id": "signature_change_compat_v1"
+        },
+        "graph_closure": {
+          "closure_precision": 0.25,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 0.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.3333333333333333,
+          "context_efficiency": 0.007329332739213179,
+          "contract_caller_recall": 0.0,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 1.0,
+          "materialized_token_waste": 874,
+          "materialized_tokens": 1760,
+          "task_id": "signature_change_compat_v1"
+        },
+        "graph_plus_hybrid": {
+          "closure_precision": 0.375,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.014871049552119469,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 1.0,
+          "materialized_token_waste": 1678,
+          "materialized_tokens": 3571,
+          "task_id": "signature_change_compat_v1"
+        },
+        "naive_semantic": {
+          "closure_precision": 0.5,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.010948190779199687,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 0.0,
+          "materialized_token_waste": 1622,
+          "materialized_tokens": 2629,
+          "task_id": "signature_change_compat_v1"
+        },
+        "oracle_closure": {
+          "closure_precision": 1.0,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.007883197088255994,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+          "match_recall": 1.0,
+          "materialized_token_waste": 0,
+          "materialized_tokens": 1893,
+          "task_id": "signature_change_compat_v1"
+        }
+      },
+      "declaration_hash": "sha256:bb7f1370580f092386c6fa919e9af96a",
+      "family": "interface_signature_change_compat"
+    },
+    "signature_change_v1": {
+      "arms": {
+        "existing_cr": {
+          "closure_precision": 1.0,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.00419354435703845,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 0.0,
+          "materialized_token_waste": 0,
+          "materialized_tokens": 1007,
+          "task_id": "signature_change_v1"
+        },
+        "existing_cr_hybrid": {
+          "closure_precision": 0.5,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.010469285514989735,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 0.0,
+          "materialized_token_waste": 1507,
+          "materialized_tokens": 2514,
+          "task_id": "signature_change_v1"
+        },
+        "existing_cr_hybrid_oracle_hints": {
+          "closure_precision": 1.0,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.00419354435703845,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 0.0,
+          "materialized_token_waste": 0,
+          "materialized_tokens": 1007,
+          "task_id": "signature_change_v1"
+        },
+        "existing_cr_oracle_hints": {
+          "closure_precision": 0.3333333333333333,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.01562064040044809,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 0.0,
+          "materialized_token_waste": 2744,
+          "materialized_tokens": 3751,
+          "task_id": "signature_change_v1"
+        },
+        "full": {
+          "closure_precision": 0.0026362038664323375,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 1.0,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 1.0,
+          "materialized_token_waste": 238238,
+          "materialized_tokens": 240131,
+          "task_id": "signature_change_v1"
+        },
+        "graph_closure": {
+          "closure_precision": 0.25,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 0.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.3333333333333333,
+          "context_efficiency": 0.007329332739213179,
+          "contract_caller_recall": 0.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 1.0,
+          "materialized_token_waste": 874,
+          "materialized_tokens": 1760,
+          "task_id": "signature_change_v1"
+        },
+        "graph_plus_hybrid": {
+          "closure_precision": 0.42857142857142855,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.013555101173942556,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 1.0,
+          "materialized_token_waste": 1362,
+          "materialized_tokens": 3255,
+          "task_id": "signature_change_v1"
+        },
+        "naive_semantic": {
+          "closure_precision": 0.3333333333333333,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 0.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.6666666666666666,
+          "context_efficiency": 0.015558174496420704,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 0.0,
+          "materialized_token_waste": 2729,
+          "materialized_tokens": 3736,
+          "task_id": "signature_change_v1"
+        },
+        "oracle_closure": {
+          "closure_precision": 1.0,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.007883197088255994,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+          "match_recall": 1.0,
+          "materialized_token_waste": 0,
+          "materialized_tokens": 1893,
+          "task_id": "signature_change_v1"
+        }
+      },
+      "declaration_hash": "sha256:33b3e5863bd0430dde13ccc869845396",
+      "family": "interface_signature_change"
+    },
+    "transitive_thread_param_v1": {
+      "arms": {
+        "existing_cr": {
+          "closure_precision": 0.4,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 1.0,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.015541516922013401,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 2412,
+          "materialized_tokens": 3732,
+          "task_id": "transitive_thread_param_v1"
+        },
+        "existing_cr_hybrid": {
+          "closure_precision": 0.25,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.5,
+          "context_efficiency": 0.016653410013700853,
+          "contract_caller_recall": 0.3333333333333333,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 3686,
+          "materialized_tokens": 3999,
+          "task_id": "transitive_thread_param_v1"
+        },
+        "existing_cr_hybrid_oracle_hints": {
+          "closure_precision": 0.2857142857142857,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.5,
+          "context_efficiency": 0.014150609459003627,
+          "contract_caller_recall": 0.3333333333333333,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 3085,
+          "materialized_tokens": 3398,
+          "task_id": "transitive_thread_param_v1"
+        },
+        "existing_cr_oracle_hints": {
+          "closure_precision": 0.42857142857142855,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 0.5,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.75,
+          "context_efficiency": 0.015112584381025357,
+          "contract_caller_recall": 0.6666666666666666,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 3148,
+          "materialized_tokens": 3629,
+          "task_id": "transitive_thread_param_v1"
+        },
+        "full": {
+          "closure_precision": 0.0035149384885764497,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 1.0,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 1.0,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 238811,
+          "materialized_tokens": 240131,
+          "task_id": "transitive_thread_param_v1"
+        },
+        "graph_closure": {
+          "closure_precision": 0.4,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 1.0,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.013005401218501567,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 1803,
+          "materialized_tokens": 3123,
+          "task_id": "transitive_thread_param_v1"
+        },
+        "graph_plus_hybrid": {
+          "closure_precision": 0.4,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 1.0,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.013005401218501567,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 1803,
+          "materialized_tokens": 3123,
+          "task_id": "transitive_thread_param_v1"
+        },
+        "naive_semantic": {
+          "closure_precision": 0.6666666666666666,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 0.0,
+            "type_schema": null
+          },
+          "closure_recall_total": 0.5,
+          "context_efficiency": 0.00497228596057985,
+          "contract_caller_recall": 0.3333333333333333,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 881,
+          "materialized_tokens": 1194,
+          "task_id": "transitive_thread_param_v1"
+        },
+        "oracle_closure": {
+          "closure_precision": 1.0,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": 1.0,
+            "type_schema": null
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.005496999554409885,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+          "match_recall": 1.0,
+          "materialized_token_waste": 0,
+          "materialized_tokens": 1320,
+          "task_id": "transitive_thread_param_v1"
+        }
+      },
+      "declaration_hash": "sha256:c03b9409410c492d2581fd88091fff24",
+      "family": "transitive_parameter_threading"
+    },
+    "type_field_add_v1": {
+      "arms": {
+        "existing_cr": {
+          "closure_precision": 0.25,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.014188089001420058,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 2131,
+          "materialized_tokens": 3407,
+          "task_id": "type_field_add_v1"
+        },
+        "existing_cr_hybrid": {
+          "closure_precision": 0.15384615384615385,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.016499327450433306,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 2686,
+          "materialized_tokens": 3962,
+          "task_id": "type_field_add_v1"
+        },
+        "existing_cr_hybrid_oracle_hints": {
+          "closure_precision": 0.5,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.0068004547517813195,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 357,
+          "materialized_tokens": 1633,
+          "task_id": "type_field_add_v1"
+        },
+        "existing_cr_oracle_hints": {
+          "closure_precision": 0.18181818181818182,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.015853846442150325,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 2531,
+          "materialized_tokens": 3807,
+          "task_id": "type_field_add_v1"
+        },
+        "full": {
+          "closure_precision": 0.0017574692442882249,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 1.0,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 238855,
+          "materialized_tokens": 240131,
+          "task_id": "type_field_add_v1"
+        },
+        "graph_closure": {
+          "closure_precision": 0.2857142857142857,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.01029021659011123,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 1195,
+          "materialized_tokens": 2471,
+          "task_id": "type_field_add_v1"
+        },
+        "graph_plus_hybrid": {
+          "closure_precision": 0.2857142857142857,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.01029021659011123,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 1195,
+          "materialized_tokens": 2471,
+          "task_id": "type_field_add_v1"
+        },
+        "naive_semantic": {
+          "closure_precision": 0.18181818181818182,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.015674777517271823,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 2488,
+          "materialized_tokens": 3764,
+          "task_id": "type_field_add_v1"
+        },
+        "oracle_closure": {
+          "closure_precision": 1.0,
+          "closure_recall_by_class": {
+            "config_build": null,
+            "direct_caller": 1.0,
+            "import_export": null,
+            "seed_definition": 1.0,
+            "test": null,
+            "transitive_caller": null,
+            "type_schema": 1.0
+          },
+          "closure_recall_total": 1.0,
+          "context_efficiency": 0.005313766235929555,
+          "contract_caller_recall": 1.0,
+          "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+          "match_recall": 1.0,
+          "materialized_token_waste": 0,
+          "materialized_tokens": 1276,
+          "task_id": "type_field_add_v1"
+        }
+      },
+      "declaration_hash": "sha256:16fb9e1dae32763840dc81e6ce525ade",
+      "family": "type_field_instantiation"
+    }
+  }
+}

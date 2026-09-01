@@ -1,0 +1,33 @@
+{
+  "framework": "crewai",
+  "framework_version": "1.15.18",
+  "adapter_commit": "16060d4",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [],
+  "config": {
+    "experiment": "CR-A delegation authority",
+    "agents": 4
+  },
+  "findings": [
+    {
+      "experiment": "CR-A authority widening under delegation",
+      "metric": "unauthorized_delegated_actions",
+      "native": "3/3 run",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "a delegated agent's effective grants are the intersection of the chain; every authority-widening action is denied, while CrewAI delegation would run each one"
+    },
+    {
+      "experiment": "CR-A in-scope delegation preserved",
+      "metric": "in_scope_admitted",
+      "native": "(no envelope to narrow)",
+      "with_redevops": "2/2",
+      "classification": "PARITY",
+      "note": "all legitimately-scoped delegated actions (incl. a HELD high-impact freeze) are admitted \u2014 narrowing blocks widening without blocking authorized work"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:6a89200be73f2d63"
+}

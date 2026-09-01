@@ -1,0 +1,45 @@
+{
+  "framework": "llama-index",
+  "framework_version": "0.14.24",
+  "adapter_commit": "f54b11e",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {
+    "haystack": "liverag"
+  },
+  "model_ids": [
+    "gpt-4o-mini"
+  ],
+  "config": {
+    "n": 6,
+    "passages": 40
+  },
+  "findings": [
+    {
+      "experiment": "LI-B synthesis hides retrieval miss",
+      "metric": "confident_wrong_answers",
+      "native": "4/6 answered confidently",
+      "with_redevops": "6/6 abstained",
+      "classification": "REDEVOPS_DELTA",
+      "note": "on a retrieval miss the query engine still synthesizes a confident answer; ReDevOps evidence-support verification abstains (REQUIRE_REVIEW) because the value is not in the retrieved nodes"
+    },
+    {
+      "experiment": "LI-B answer accuracy",
+      "metric": "accuracy_retrieved_vs_missed",
+      "native": 0,
+      "with_redevops": 1,
+      "classification": "REDEVOPS_DELTA",
+      "note": "when the LlamaIndex retriever finds the needle the query engine is right; when it misses, synthesis is confidently wrong \u2014 retrieval quality, not synthesis fluency, decides correctness"
+    },
+    {
+      "experiment": "LI-B selective accuracy",
+      "metric": "selective_accuracy@coverage",
+      "native": "(the query engine offers no abstention)",
+      "with_redevops": "1.000 @ 50%",
+      "classification": "REDEVOPS_DELTA",
+      "note": "answer only when verification confirms evidence support; the unsupported tail is routed to review"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:9f07516e1b097950"
+}

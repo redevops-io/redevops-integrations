@@ -1,0 +1,47 @@
+# Refactor FAMILY: interface / signature change.
+# A required parameter is added to a function; EVERY call site must change or the code breaks. This family
+# stresses contract-caller recall hardest, and deliberately places the callers in a DIFFERENT file from the
+# definition, so a naive definition-anchored retriever misses them (the H1 shape). No test/config edges are
+# required here (empty classes are an explicit claim, not an omission) -> those recalls are N/A, not free 1.0.
+task_id: signature_change_v1
+family: interface_signature_change
+repo: agentic-os
+base_commit: f8ce79c            # pinned + verified against the real tree when the reference patch is authored
+model: TBD
+context_token_budget: TBD
+
+description: >
+  Add a required `attempt: int` parameter to `Executor.run(node, inputs)` (so the executor records which
+  retry attempt a dispatch is). The definition lives in executor.py; both call sites live in runtime.py (the
+  serial `_execute` path and the concurrent `_execute_wave` path) and must pass the new argument. Add a test.
+
+seed_symbols:
+  - "agentic_os.mission.executor:Executor.run"
+
+required_closure:
+  seed_definition:
+    - "agentic_os.mission.executor:Executor.run"     # the signature change
+  direct_caller:
+    - "agentic_os.mission.runtime:MissionRuntime._execute"       # serial dispatch site (different file)
+    - "agentic_os.mission.runtime:MissionRuntime._execute_wave"  # concurrent dispatch site (different file)
+  transitive_caller: []
+  type_schema: []
+  import_export: []
+  test:
+    - "tests:test_executor_run_records_attempt"
+  config_build: []
+
+# every call site MUST change -> all direct callers are contract callers here.
+contract_callers:
+  - "agentic_os.mission.runtime:MissionRuntime._execute"
+  - "agentic_os.mission.runtime:MissionRuntime._execute_wave"
+
+creates:
+  - "tests:test_executor_run_records_attempt"   # the patch CREATES this test (not retrievable)
+
+resolution:
+  method: pytest
+  targets:
+    - "tests/test_executor_run_records_attempt.py"
+  must_not_regress: "tests/test_mission.py tests/test_mission_concurrency.py"
+declaration_hash: "sha256:33b3e5863bd0430dde13ccc869845396"

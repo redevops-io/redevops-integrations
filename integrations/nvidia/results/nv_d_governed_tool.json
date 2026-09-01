@@ -1,0 +1,48 @@
+{
+  "framework": "nvidia-nemo-agent-toolkit",
+  "framework_version": "1.8.0",
+  "adapter_commit": "0503d23",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [
+    "gpt-4o-mini"
+  ],
+  "config": {},
+  "findings": [
+    {
+      "experiment": "NV-D missing-authority",
+      "metric": "unauthorized_actions",
+      "native": "(agent would just call the tool)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "deny-by-default: no grant \u21d2 the consequential action never runs"
+    },
+    {
+      "experiment": "NV-D approval-hold",
+      "metric": "side_effects_before_approval",
+      "native": "(no HITL gate)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "mission parks at WAITING_HUMAN; the external publish is withheld until a human approves"
+    },
+    {
+      "experiment": "NV-D approve",
+      "metric": "side_effects_after_approval",
+      "native": null,
+      "with_redevops": 1,
+      "classification": "REDEVOPS_DELTA",
+      "note": "approved once \u21d2 the publish fires exactly once"
+    },
+    {
+      "experiment": "NV-D replay",
+      "metric": "duplicate_side_effects_on_replay",
+      "native": "(stateless re-run double-fires on every crash)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "replay reconstructs from the event ledger, no re-execution (consistent=replay-api:TypeError)"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:05aaad5650a6cb77"
+}

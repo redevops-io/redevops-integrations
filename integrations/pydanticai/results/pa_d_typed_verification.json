@@ -1,0 +1,56 @@
+{
+  "framework": "pydantic-ai",
+  "framework_version": "2.36.0",
+  "adapter_commit": "0997d46",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [],
+  "config": {
+    "experiment": "PA-D typed-validity-vs-verification"
+  },
+  "findings": [
+    {
+      "experiment": "PA-D unsupported",
+      "metric": "valid_but_admissible",
+      "native": "pydantic_valid=True",
+      "with_redevops": "admissible=False",
+      "classification": "REDEVOPS_DELTA",
+      "note": "verification: recommendation not supported by retrieved evidence"
+    },
+    {
+      "experiment": "PA-D stale-evidence",
+      "metric": "valid_but_admissible",
+      "native": "pydantic_valid=True",
+      "with_redevops": "admissible=False",
+      "classification": "REDEVOPS_DELTA",
+      "note": "verification: cited evidence is stale (beyond freshness bound)"
+    },
+    {
+      "experiment": "PA-D missing-authority",
+      "metric": "valid_but_admissible",
+      "native": "pydantic_valid=True",
+      "with_redevops": "admissible=False",
+      "classification": "REDEVOPS_DELTA",
+      "note": "authority: mission has no grant for the proposed action"
+    },
+    {
+      "experiment": "PA-D governance-denied",
+      "metric": "valid_but_admissible",
+      "native": "pydantic_valid=True",
+      "with_redevops": "admissible=False",
+      "classification": "REDEVOPS_DELTA",
+      "note": "governance: security is on the restricted list \u2014 deny-by-default"
+    },
+    {
+      "experiment": "PA-D admissible",
+      "metric": "valid_but_admissible",
+      "native": "pydantic_valid=True",
+      "with_redevops": "admissible=True",
+      "classification": "PARITY",
+      "note": "both layers agree the output may proceed"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:2a64d9daaeedee95"
+}

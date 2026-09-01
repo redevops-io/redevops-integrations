@@ -1,0 +1,21 @@
+# venvs
+.venv/
+integrations/azure/.venv/
+# LLM / embedding caches (regenerated on run)
+*_cache/
+*_cache.json
+scifact_verdict_cache/
+closure_verdict_cache/
+strategy_intent_cache.json
+longcontext_cache/
+crew_decision_cache/
+deploy_plan_cache/
+wealth_agent_cache/
+research_mesh_cache/
+three_apps_cache/
+# python
+__pycache__/
+*.egg-info/
+*.pyc
+# scratch
+/tmp/

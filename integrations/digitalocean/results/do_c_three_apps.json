@@ -1,0 +1,35 @@
+{
+  "framework": "digitalocean-genai",
+  "framework_version": "openai-compatible/v1",
+  "adapter_commit": "d09736c",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [
+    "gpt-4o-mini"
+  ],
+  "config": {
+    "experiment": "DO-C three apps on one runtime",
+    "tenants": 3
+  },
+  "findings": [
+    {
+      "experiment": "DO-C three real agents run on one Runtime",
+      "metric": "apps_ran",
+      "native": "3/3",
+      "with_redevops": "3/3",
+      "classification": "PARITY",
+      "note": "three heterogeneous DO app-agents run end-to-end on one shared Runtime; ReDevOps does not change what any app produces"
+    },
+    {
+      "experiment": "DO-C tenant isolation across apps",
+      "metric": "tenant_isolated",
+      "native": "(a shared runtime with no tenant scope leaks state)",
+      "with_redevops": "3/3",
+      "classification": "REDEVOPS_DELTA",
+      "note": "every app reads only its own namespace and a cross-tenant read is denied \u2014 the shared Runtime keeps the apps isolated while sharing the machinery"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:d62cff6afaf9cb2d"
+}

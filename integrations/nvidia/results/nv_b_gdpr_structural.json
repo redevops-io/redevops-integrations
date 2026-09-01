@@ -1,0 +1,36 @@
+{
+  "framework": "nvidia-nemo-agent-toolkit",
+  "framework_version": "1.8.0",
+  "adapter_commit": "0503d23",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {
+    "gdpr": "GDPRtEXT-cross-reference-graph"
+  },
+  "model_ids": [],
+  "config": {
+    "domain": "gdpr",
+    "budget": 8000,
+    "cases": 27
+  },
+  "findings": [
+    {
+      "experiment": "NV-B gdpr closure-principle",
+      "metric": "closure_recall",
+      "native": 0.0,
+      "with_redevops": 0.913,
+      "classification": "REDEVOPS_DELTA",
+      "note": "seed-only vs composed closure \u2014 dependency-complete context"
+    },
+    {
+      "experiment": "NV-B gdpr structural-vs-content",
+      "metric": "closure_recall",
+      "native": 0.412,
+      "with_redevops": 0.913,
+      "classification": "REDEVOPS_DELTA",
+      "note": "content retrieval alone is weak on a structural domain; the graph recovers the closure"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:2855f48afa9098d8"
+}

@@ -1,0 +1,51 @@
+# Refactor FAMILY: interface / signature change, COMPATIBILITY-EXPLICIT variant.
+# Identical retrieval closure to signature_change_v1 (definition + both runtime call sites), but the task
+# states the backward-compatibility requirement outright: the new parameter MUST be OPTIONAL (defaulted), so
+# existing direct callers keep working. This removes the design-judgment ambiguity that blocked resolution in
+# signature_change_v1 (where a `required` param broke direct callers), so an arm with the full closure in
+# context CAN resolve — isolating the closure-CONSISTENCY skill (edit every site) from the API-design guess.
+task_id: signature_change_compat_v1
+family: interface_signature_change_compat
+repo: agentic-os
+base_commit: f8ce79c            # pinned + verified against the real tree when the reference patch is authored
+model: TBD
+context_token_budget: TBD
+
+description: >
+  Add an OPTIONAL `attempt: int = 0` parameter to `Executor.run(node, inputs)` so the executor can record
+  which retry attempt a dispatch is. IMPORTANT: the parameter MUST be optional (have a default) so existing
+  callers that call `Executor.run(node, inputs)` directly keep working unchanged — do not make it required.
+  Then thread it through both runtime dispatch sites: the serial `_execute` path and the concurrent
+  `_execute_wave` path must pass `attempt=node.attempts`. The definition lives in executor.py; both call sites
+  live in runtime.py. Add a test.
+
+seed_symbols:
+  - "agentic_os.mission.executor:Executor.run"
+
+required_closure:
+  seed_definition:
+    - "agentic_os.mission.executor:Executor.run"     # the (optional) signature change
+  direct_caller:
+    - "agentic_os.mission.runtime:MissionRuntime._execute"       # serial dispatch site (different file)
+    - "agentic_os.mission.runtime:MissionRuntime._execute_wave"  # concurrent dispatch site (different file)
+  transitive_caller: []
+  type_schema: []
+  import_export: []
+  test:
+    - "tests:test_executor_run_attempt_defaulted"
+  config_build: []
+
+# every runtime dispatch site MUST thread the new param -> both direct callers are contract callers.
+contract_callers:
+  - "agentic_os.mission.runtime:MissionRuntime._execute"
+  - "agentic_os.mission.runtime:MissionRuntime._execute_wave"
+
+creates:
+  - "tests:test_executor_run_attempt_defaulted"   # the patch CREATES this test (not retrievable)
+
+resolution:
+  method: pytest
+  targets:
+    - "tests/test_executor_run_attempt_defaulted.py"
+  must_not_regress: "tests/test_mission.py tests/test_mission_concurrency.py"
+declaration_hash: "sha256:bb7f1370580f092386c6fa919e9af96a"

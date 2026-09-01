@@ -1,0 +1,46 @@
+{
+  "framework": "pydantic-ai",
+  "framework_version": "2.36.0",
+  "adapter_commit": "0997d46",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {
+    "scifact": "allenai/scifact"
+  },
+  "model_ids": [
+    "gpt-4o-mini"
+  ],
+  "config": {
+    "domain": "scifact",
+    "budget": 300,
+    "n": 30
+  },
+  "findings": [
+    {
+      "experiment": "PA-E verification accuracy",
+      "metric": "task_accuracy",
+      "native": 0.8,
+      "with_redevops": 0.867,
+      "classification": "REDEVOPS_DELTA",
+      "note": "typed pydantic-ai verdict on naive vs closure context (equal budget/model)"
+    },
+    {
+      "experiment": "PA-E evidence recall",
+      "metric": "closure_recall",
+      "native": 0.841,
+      "with_redevops": 0.877,
+      "classification": "REDEVOPS_DELTA",
+      "note": "gold evidence sentences recovered"
+    },
+    {
+      "experiment": "PA-E selective autonomy",
+      "metric": "autonomous_accuracy@coverage",
+      "native": "(a typed verdict carries no abstention signal)",
+      "with_redevops": "0.889 @ 90%",
+      "classification": "REDEVOPS_DELTA",
+      "note": "agree\u21d2resolve, disagree\u21d2REQUIRE_REVIEW; routed-tail acc 0.667"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:faccc60194881b02"
+}

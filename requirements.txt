@@ -1,0 +1,23 @@
+# ReDevOps integrations — the shared runtime boundary + per-framework SDKs.
+#
+# The Mission SDK is the one required dependency for every slice:
+redevops-mission @ git+https://github.com/redevops-io/mission-sdk
+
+# Framework SDKs (install the ones for the slices you want to run):
+nvidia-nat               # NVIDIA NeMo Agent Toolkit  (integrations/nvidia)
+pydantic-ai-slim[openai] # PydanticAI                 (integrations/pydanticai)
+llama-index-core         # LlamaIndex                 (integrations/llamaindex)
+crewai                   # CrewAI                     (integrations/crewai)
+google-adk[extensions]   # Google ADK / A2A           (integrations/google)
+a2a-sdk                  #   "
+strands-agents           # AWS Strands Agents         (integrations/aws)
+openai                   # DigitalOcean GenAI (OpenAI-compatible) + shared LLM helper
+
+# Local embeddings for the closure/retrieval slices (nvidia, pydanticai, llamaindex):
+sentence-transformers
+
+# NOTE — Azure (integrations/azure) uses a DEDICATED venv because Semantic Kernel pins
+# pydantic/openai below the floor the other slices share:
+#   uv venv integrations/azure/.venv --python 3.12
+#   VIRTUAL_ENV=integrations/azure/.venv uv pip install semantic-kernel \
+#     "redevops-mission @ git+https://github.com/redevops-io/mission-sdk"

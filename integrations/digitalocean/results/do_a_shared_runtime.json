@@ -1,0 +1,41 @@
+{
+  "framework": "digitalocean-genai",
+  "framework_version": "openai-compatible/v1",
+  "adapter_commit": "d09736c",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [],
+  "config": {
+    "experiment": "DO-A shared runtime tenant isolation",
+    "tenants": 3
+  },
+  "findings": [
+    {
+      "experiment": "DO-A cross-tenant isolation",
+      "metric": "cross_tenant_accesses_admitted",
+      "native": "3/3 run",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "every access is scoped to the acting tenant; a cross-tenant read or an out-of-grant action is denied by default, while a naive shared runtime would run each"
+    },
+    {
+      "experiment": "DO-A in-tenant work preserved",
+      "metric": "in_scope_admitted",
+      "native": "(no tenant scoping)",
+      "with_redevops": "3/3",
+      "classification": "PARITY",
+      "note": "each app's own in-grant, own-namespace work is admitted \u2014 isolation blocks the cross-tenant without blocking the app"
+    },
+    {
+      "experiment": "DO-A shared machinery, once",
+      "metric": "capabilities_provided",
+      "native": "15 (rebuilt per app: 3\u00d75)",
+      "with_redevops": 5,
+      "classification": "REDEVOPS_DELTA",
+      "note": "context/retry/replay/governance/telemetry are provided once by the shared Runtime instead of rebuilt in each of the 3 apps"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:00d656100dd50146"
+}

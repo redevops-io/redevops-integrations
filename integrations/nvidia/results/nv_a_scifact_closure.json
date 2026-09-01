@@ -1,0 +1,53 @@
+{
+  "framework": "nvidia-nemo-agent-toolkit",
+  "framework_version": "1.8.0",
+  "adapter_commit": "0503d23",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {
+    "scifact": "allenai/scifact"
+  },
+  "model_ids": [
+    "gpt-4o-mini"
+  ],
+  "config": {
+    "domain": "scifact",
+    "budget": 300,
+    "n": 30
+  },
+  "findings": [
+    {
+      "experiment": "NV-A verification accuracy",
+      "metric": "task_accuracy",
+      "native": 0.8,
+      "with_redevops": 0.867,
+      "classification": "REDEVOPS_DELTA",
+      "note": "NeMo verdict on naive vs closure context (equal budget/model)"
+    },
+    {
+      "experiment": "NV-A evidence recall",
+      "metric": "closure_recall",
+      "native": 0.841,
+      "with_redevops": 0.877,
+      "classification": "REDEVOPS_DELTA",
+      "note": "gold evidence sentences recovered"
+    },
+    {
+      "experiment": "NV-A selective autonomy",
+      "metric": "autonomous_accuracy@coverage",
+      "native": "(no abstention signal)",
+      "with_redevops": "0.857 @ 93%",
+      "classification": "REDEVOPS_DELTA",
+      "note": "agree\u21d2resolve, disagree\u21d2REQUIRE_REVIEW; routed-tail acc 1.000"
+    }
+  ],
+  "tests": {
+    "nemo_evaluator": {
+      "evaluator": "closure_accuracy",
+      "n": 30,
+      "accuracy": 0.8666666666666667,
+      "correct": 26
+    }
+  },
+  "result_digest": "sha256:7ffd849e9efa7ff7"
+}

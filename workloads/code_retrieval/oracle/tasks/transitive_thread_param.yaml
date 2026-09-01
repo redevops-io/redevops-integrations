@@ -1,0 +1,53 @@
+# Refactor FAMILY: transitive parameter threading (compatibility-explicit).
+# A new optional parameter is threaded down a 3-LEVEL call chain, so the closure includes a caller TWO hops
+# from the seed. This is the family a lexical/dense retriever is expected to miss on: it surfaces the seed and
+# maybe its immediate caller (which shares surface tokens), but NOT the transitive dispatch methods (which
+# mention neither the seed nor the param). A call-graph traversal, by contrast, reaches them by following
+# caller edges. Chain: MissionRuntime._execute / ._execute_wave  ->  ._resolve_inputs  ->  ._approval_edit.
+task_id: transitive_thread_param_v1
+family: transitive_parameter_threading
+repo: agentic-os
+base_commit: f8ce79c
+model: TBD
+context_token_budget: TBD
+
+description: >
+  Thread an OPTIONAL `attempt: int = 0` parameter down the input-resolution call chain so an approval-edit
+  lookup can be scoped to the dispatch attempt. The parameter MUST be optional (defaulted) so existing direct
+  callers keep working. Add `attempt: int = 0` to `MissionRuntime._approval_edit`; add `attempt: int = 0` to
+  `MissionRuntime._resolve_inputs` and pass `attempt=attempt` where it calls `self._approval_edit(...)`; and in
+  BOTH dispatch methods `MissionRuntime._execute` and `MissionRuntime._execute_wave`, pass
+  `attempt=node.attempts` where they call `self._resolve_inputs(...)`. Add a test.
+
+seed_symbols:
+  - "agentic_os.mission.runtime:MissionRuntime._approval_edit"
+
+required_closure:
+  seed_definition:
+    - "agentic_os.mission.runtime:MissionRuntime._approval_edit"
+  direct_caller:
+    - "agentic_os.mission.runtime:MissionRuntime._resolve_inputs"    # the ONLY direct caller of the seed
+  transitive_caller:
+    - "agentic_os.mission.runtime:MissionRuntime._execute"           # 2 hops from seed (calls _resolve_inputs)
+    - "agentic_os.mission.runtime:MissionRuntime._execute_wave"      # 2 hops from seed (calls _resolve_inputs)
+  type_schema: []
+  import_export: []
+  test:
+    - "tests:test_attempt_threaded_through_resolve_inputs"
+  config_build: []
+
+# every level that must pass the new param is a contract caller.
+contract_callers:
+  - "agentic_os.mission.runtime:MissionRuntime._resolve_inputs"
+  - "agentic_os.mission.runtime:MissionRuntime._execute"
+  - "agentic_os.mission.runtime:MissionRuntime._execute_wave"
+
+creates:
+  - "tests:test_attempt_threaded_through_resolve_inputs"
+
+resolution:
+  method: pytest
+  targets:
+    - "tests/test_attempt_threaded_through_resolve_inputs.py"
+  must_not_regress: "tests/test_mission.py tests/test_mission_concurrency.py"
+declaration_hash: "sha256:c03b9409410c492d2581fd88091fff24"

@@ -1,0 +1,54 @@
+# Refactor FAMILY: capability metadata propagation.
+# A field is added to a core spec and must thread through binding, SDK exposure, and consumers, with a test.
+# Required closure is declared as SEED SYMBOLS + REQUIRED DEPENDENCY CLASSES (symbols, NOT filenames);
+# symbols resolve to files only at scoring time. Hash frozen BEFORE the reference patch is written.
+task_id: cap_metadata_propagation_v1
+family: capability_metadata_propagation
+repo: agentic-os
+base_commit: f8ce79c            # pinned when the reference patch is authored
+model: TBD                 # fixed across arms at run time (Track-A)
+context_token_budget: TBD  # matched across arms at run time
+
+description: >
+  Add a per-capability integer field `retry_budget` (default 0) to the capability spec and thread it end to
+  end: carried onto the physical node by the compiler, settable through the SDK capability() builder, and
+  read by the runtime's node-execution retry path. Add a test proving it defaults, threads spec->node, and
+  is honoured.
+
+# The symbols the task is ABOUT (not files).
+seed_symbols:
+  - "agentic_os.mission.types:CapabilitySpec"
+  - "agentic_os.mission.types:Node"
+
+# What CORRECTNESS requires, per dependency class. Declared as symbols; a class left empty is an explicit
+# claim that this change does NOT require it (so recall for that class is not spuriously rewarded).
+required_closure:
+  seed_definition:
+    - "agentic_os.mission.types:CapabilitySpec"   # add the field
+    - "agentic_os.mission.types:Node"             # carry the field
+  direct_caller:
+    - "agentic_os.mission.compiler:compile_intent"       # binds cap -> Node; must copy the field
+    - "agentic_os.mission.operator_sdk:capability" # builder kwarg -> spec
+  transitive_caller:
+    - "agentic_os.mission.runtime:MissionRuntime._execute"  # the retry path that must read node.retry_budget
+  type_schema:
+    - "agentic_os.mission.types:CapabilitySpec"   # the field's type lives on the dataclass
+  import_export: []          # internal; no public surface change required
+  test:
+    - "tests:test_retry_budget_threads_and_is_honoured"  # a new/updated covering test
+  config_build: []           # no manifest/build change required
+
+# contract_caller = the subset of callers that MUST change (H3b's candidate predictor).
+contract_callers:
+  - "agentic_os.mission.compiler:compile_intent"
+  - "agentic_os.mission.operator_sdk:capability"
+
+creates:
+  - "tests:test_retry_budget_threads_and_is_honoured"   # the patch CREATES this test (not retrievable)
+
+resolution:
+  method: pytest
+  targets:
+    - "tests/test_retry_budget_threads_and_is_honoured.py"
+  must_not_regress: "tests/test_mission.py tests/test_operator_sdk.py"
+declaration_hash: "sha256:3edfe0fa4508e4f54c38c9aeb430b873"

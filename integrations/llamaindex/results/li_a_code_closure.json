@@ -1,0 +1,46 @@
+{
+  "framework": "llama-index",
+  "framework_version": "0.14.24",
+  "adapter_commit": "f54b11e",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {
+    "repo": "agentic-os"
+  },
+  "model_ids": [
+    "bge-small-en (local)"
+  ],
+  "config": {
+    "budget": 4000,
+    "n_tasks": 5,
+    "symbols": 1138
+  },
+  "findings": [
+    {
+      "experiment": "LI-A closure recall",
+      "metric": "closure_recall_total",
+      "native": 0.32,
+      "with_redevops": 0.693,
+      "classification": "REDEVOPS_DELTA",
+      "note": "LlamaIndex retriever alone vs LlamaIndex-as-representation composed with structural closure"
+    },
+    {
+      "experiment": "LI-A contract-caller recall",
+      "metric": "contract_caller_recall",
+      "native": 0.3,
+      "with_redevops": 0.6,
+      "classification": "REDEVOPS_DELTA",
+      "note": "the structural closure a semantic retriever misses \u2014 the boundary just outside retrieval"
+    },
+    {
+      "experiment": "LI-A composes, never degrades",
+      "metric": "regressions_vs_llamaindex",
+      "native": "1/5 tasks retrieval alone resolves",
+      "with_redevops": 0,
+      "classification": "PARITY",
+      "note": "on tasks LlamaIndex already resolves, composition matches it; 0 tasks regressed \u2014 the retriever is composed and preferred when it suffices, not replaced (match recall is high by construction on the seeded arm, so it is not claimed as a retrieval win)"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:7738c0ec3d193ad7"
+}

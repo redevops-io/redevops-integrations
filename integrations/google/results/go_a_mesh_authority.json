@@ -1,0 +1,41 @@
+{
+  "framework": "google-adk",
+  "framework_version": "2.8.0",
+  "adapter_commit": "ecc916b",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [],
+  "config": {
+    "experiment": "GO-A mesh authority + provenance",
+    "agents": 4
+  },
+  "findings": [
+    {
+      "experiment": "GO-A transitive authority attenuation",
+      "metric": "unauthorized_hops_admitted",
+      "native": "2/2 run",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "effective authority is the intersection of the WHOLE delegation chain; a grant dropped at an intermediate hop cannot be regained downstream \u2014 native A2A would run each remote action"
+    },
+    {
+      "experiment": "GO-A provenance-gated synthesis",
+      "metric": "unprovenanced_findings_admitted",
+      "native": "2/2 trusted",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "a finding enters the synthesis only when its provenance chain is attributable to authorized mesh agents; an unknown relay or a missing chain is excluded"
+    },
+    {
+      "experiment": "GO-A in-scope delegation preserved",
+      "metric": "in_scope_admitted",
+      "native": "(no chain-wide envelope)",
+      "with_redevops": "2/2",
+      "classification": "PARITY",
+      "note": "legitimately-scoped, authorized-provenance work is admitted across every hop"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:f7c98d841762e8cf"
+}

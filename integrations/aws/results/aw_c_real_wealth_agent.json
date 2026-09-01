@@ -1,0 +1,35 @@
+{
+  "framework": "strands-agents",
+  "framework_version": "1.54.0",
+  "adapter_commit": "3cf966e",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [
+    "gpt-4o-mini"
+  ],
+  "config": {
+    "experiment": "AW-C real wealth agent",
+    "n": 4
+  },
+  "findings": [
+    {
+      "experiment": "AW-C real agent runs end-to-end",
+      "metric": "proposals",
+      "native": "4/4",
+      "with_redevops": "4/4",
+      "classification": "PARITY",
+      "note": "a real Strands wealth-manager agent proposes an action for every scenario; ReDevOps runs it in shadow without changing what it recommends"
+    },
+    {
+      "experiment": "AW-C shadow policy audit on real proposals",
+      "metric": "denied_by_policy",
+      "native": "(a live agent would act on each proposal)",
+      "with_redevops": "1 denied / 4",
+      "classification": "REDEVOPS_DELTA",
+      "note": "each real agent proposal is evaluated against the composed IAM+guardrail+Mission policy; the withdrawal proposal is denied by the SCP guardrail before any money moves"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:406d1434674fe83a"
+}

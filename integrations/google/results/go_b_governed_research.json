@@ -1,0 +1,48 @@
+{
+  "framework": "google-adk",
+  "framework_version": "2.8.0",
+  "adapter_commit": "ecc916b",
+  "mission_sdk_version": "",
+  "context_runtime_version": "",
+  "dataset_hashes": {},
+  "model_ids": [],
+  "config": {
+    "experiment": "GO-B governed research action"
+  },
+  "findings": [
+    {
+      "experiment": "GO-B missing-authority",
+      "metric": "unauthorized_actions",
+      "native": "(a mesh finding would just be written)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "a delegated finding is not authority to mutate shared state; no grant \u21d2 the write never runs"
+    },
+    {
+      "experiment": "GO-B approval-hold",
+      "metric": "side_effects_before_approval",
+      "native": "(no HITL gate across the mesh)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "mission parks at WAITING_HUMAN; the shared-KB write is withheld until a human approves"
+    },
+    {
+      "experiment": "GO-B approve",
+      "metric": "side_effects_after_approval",
+      "native": null,
+      "with_redevops": 1,
+      "classification": "REDEVOPS_DELTA",
+      "note": "approved once \u21d2 the KB write fires exactly once"
+    },
+    {
+      "experiment": "GO-B replay",
+      "metric": "duplicate_side_effects_on_replay",
+      "native": "(a stateless mesh re-run re-writes on every crash)",
+      "with_redevops": 0,
+      "classification": "REDEVOPS_DELTA",
+      "note": "replay reconstructs from the event ledger, no re-execution (consistent=replay-api:TypeError)"
+    }
+  ],
+  "tests": {},
+  "result_digest": "sha256:c9f862cafb10017d"
+}
