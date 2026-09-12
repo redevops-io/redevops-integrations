@@ -1,5 +1,7 @@
 # ReDevOps Integrations
 
+[![NVIDIA Inception](https://img.shields.io/badge/NVIDIA-Inception%20Program%20Member-76B900.svg)](https://www.nvidia.com/en-us/startups/)
+
 Reference implementations of the **ReDevOps Mission Runtime** wrapped around the agent frameworks and clouds you
 already use. Each integration keeps the framework's native agent loop and adds the production runtime properties
 *around* it — closure-aware context, authority, approval, replay, verification and governance — then classifies
