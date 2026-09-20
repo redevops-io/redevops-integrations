@@ -1,7 +1,7 @@
 # ReDevOps integrations — the shared runtime boundary + per-framework SDKs.
 #
 # The Mission SDK is the one required dependency for every slice:
-redevops-mission @ git+https://github.com/redevops-io/mission-sdk
+redevops-mission @ git+https://github.com/redevops-io/mission-sdk@v0.3.0
 
 # Framework SDKs (install the ones for the slices you want to run):
 nvidia-nat               # NVIDIA NeMo Agent Toolkit  (integrations/nvidia)
