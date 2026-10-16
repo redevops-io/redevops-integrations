@@ -24,7 +24,7 @@
 
 ## Known issues
 
-- Dependency chain: this repo is Apache-2.0 and requires `redevops-mission`, which in turn depends on `agentic-os` (licence label differs; flagged for counsel in the PR, no conclusion here).
+- Dependency chain: this repo is Apache-2.0 and requires `redevops-mission`, which in turn depends on `agentic-os`.
 - Pin is behind the latest Mission SDK tag (see above).
 
 Related repositories and what each owns: see OVERLAP in [README.md](README.md#overlap).
