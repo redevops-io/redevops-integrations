@@ -1,0 +1,22 @@
+name: tests
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+permissions:
+  contents: read
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax check (no framework SDKs installed)
+        run: python -m compileall -q adapters integrations workloads
+      - name: Scorer unit tests
+        run: |
+          pip install pytest pyyaml
+          python -m pytest -q workloads/code_retrieval/test_scoring.py
