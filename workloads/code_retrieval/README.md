@@ -1,7 +1,7 @@
 # Code-retrieval benchmark — Phase 0
 
 Does the Context Runtime preserve the **dependency closure** a code change requires — not just the nearest
-snippet? Full plan + rationale: [`docs/plans/code_dependency_retrieval_test_plan.md`](../../docs/plans/code_dependency_retrieval_test_plan.md).
+snippet? Full plan + rationale: `docs/plans/code_dependency_retrieval_test_plan.md` *(not included in this repo)*.
 
 **Discipline:** the plugin is an experimentally *earned* feature. Phase 0 tests the **existing CR only**;
 the schema and oracle are **frozen before any arm runs**; the decision gate decides whether Phase 1 (a
@@ -50,10 +50,10 @@ representation (H3b: *minimum sufficient change closure*, not maximum dependency
   retrieved stays unfixable). Agent = **Qwen3.8-27B** (`:31111`, thinking disabled), pass@2. Frozen acceptance
   tests in `oracle/acceptance/`.
 
-**Retrieval numbers:** [`docs/results/code_retrieval_phase0.md`](../../docs/results/code_retrieval_phase0.md).
+**Retrieval numbers:** `docs/results/code_retrieval_phase0.md` *(not included in this repo)*.
 Dense hybrid (`existing_cr_hybrid`, bge-small + BM25) **materially beats lexical** — on `cap_metadata` it lifts
 closure 0.40→0.80 and contract 0.50→1.00; only `transitive_caller` resists. **Resolution numbers:**
-[`docs/results/code_retrieval_resolution.md`](../../docs/results/code_retrieval_resolution.md) — two families
+`docs/results/code_retrieval_resolution.md` *(not included in this repo)* — two families
 (ambiguous + **compatibility-explicit**) × two agent models (local **Qwen3.8-27B**, cloud **Kimi-k2.7-code**
 via `--provider kimi`). Headline: on the compat-explicit family **`oracle_closure` RESOLVES 2/2 on both
 models** while partial-context arms fail 0/2 (they miss the seed def) — so **closure recall now determines
@@ -62,7 +62,7 @@ trap → the earlier 0/2 was a task-spec artifact, not a model/retrieval limit. 
 no outcome.
 
 **Phase 1 — graph traversal (built + measured):**
-[`docs/results/code_retrieval_graph.md`](../../docs/results/code_retrieval_graph.md). A call-graph traversal
+`docs/results/code_retrieval_graph.md` *(not included in this repo)*. A call-graph traversal
 arm (`graph_closure`, `resolver.build_call_graph`) and its **union with content retrieval**
 (`graph_plus_hybrid`). Graph recovers the **transitive-caller** class content retrieval misses (transitive
 family closure `0.50→1.00`) but has its own blind spots (class-instantiation, non-self-receiver calls); the
