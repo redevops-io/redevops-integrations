@@ -8,7 +8,7 @@
 This follows the reference template: **reference implementation → benchmark evidence → architecture → reproducible
 example.** It is framed as *conformance + incremental runtime value*, never a "PydanticAI vs ReDevOps" scorecard.
 
-**The differentiation for PydanticAI is precise.** PydanticAI's typed boundary guarantees an output's *structure* —
+**What the PydanticAI slice tests.** PydanticAI's typed boundary guarantees an output's *structure* —
 a well-typed, schema-valid Pydantic model. Structure alone does not establish that the output is *supported by
 evidence*, *fresh*, *authorized*, or *policy-admissible*, nor that a restart won't act on it twice. An application
 can of course build some of those checks itself; the point is that they are not properties of the type, and ReDevOps

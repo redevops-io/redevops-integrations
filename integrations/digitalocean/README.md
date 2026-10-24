@@ -9,7 +9,7 @@
 This follows the reference template: **reference implementation → benchmark evidence → architecture → reproducible
 example.** It is framed as *conformance + incremental runtime value*, never a "DigitalOcean vs ReDevOps" scorecard.
 
-**The differentiation for DigitalOcean is the shared-Runtime thesis, not a new framework.** DigitalOcean's GenAI
+**The DigitalOcean slice tests the shared Runtime, not a new framework.** DigitalOcean's GenAI
 Platform is an OpenAI-compatible managed agent + knowledge-base stack, ideal for lean apps. The gap it leaves is
 the one this whole series is about: every app still rebuilds context, retry, replay, governance and telemetry. So
 the DO slice runs three real apps — **telegrambot.ai · nutrients.tech · vibexgen.io** — on ONE ReDevOps Runtime,
@@ -81,5 +81,5 @@ integrations/
     results/                 # emitted acceptance bundles
 ```
 
-Same `common/` adapter contract as every other slice. This is the shared-Runtime slice: the differentiator is one
+Same `common/` adapter contract as every other slice. This is the shared-Runtime slice: the point of the slice is one
 runtime under several apps, not a new agent framework.

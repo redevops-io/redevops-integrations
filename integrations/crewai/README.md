@@ -8,7 +8,7 @@
 This follows the reference template: **reference implementation → benchmark evidence → architecture → reproducible
 example.** It is framed as *conformance + incremental runtime value*, never a "CrewAI vs ReDevOps" scorecard.
 
-**The differentiation for CrewAI is precise.** CrewAI's strongest abstraction is multi-agent delegation: a manager
+**What the CrewAI slice tests.** CrewAI's strongest abstraction is multi-agent delegation: a manager
 hands work to coworkers, who run with their own tools. So we test the boundary *immediately outside* delegation.
 In CrewAI there is no notion that a delegate may not exceed the delegator's authority — the coworker's tools simply
 fire. ReDevOps makes a delegated agent's effective grants the **intersection** of the delegation chain (authority

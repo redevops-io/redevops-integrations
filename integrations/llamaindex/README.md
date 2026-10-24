@@ -9,7 +9,7 @@
 This follows the reference template: **reference implementation → benchmark evidence → architecture → reproducible
 example.** It is framed as *conformance + incremental runtime value*, never a "LlamaIndex vs ReDevOps" scorecard.
 
-**The differentiation for LlamaIndex is precise.** LlamaIndex's strongest abstraction is retrieval over an index,
+**What the LlamaIndex slice tests.** LlamaIndex's strongest abstraction is retrieval over an index,
 so we test the boundary *immediately outside* it. A semantic retriever finds what is textually similar to a query;
 it does not, by construction, recover a code change's **contract callers** and transitive callers (structurally
 linked, not similar), and its query engine synthesizes a confident answer **whether or not** retrieval found the

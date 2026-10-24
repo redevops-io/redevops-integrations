@@ -9,7 +9,7 @@
 This follows the reference template: **reference implementation → benchmark evidence → architecture → reproducible
 example.** It is framed as *conformance + incremental runtime value*, never a "Strands vs ReDevOps" scorecard.
 
-**The differentiation for AWS is precise.** AWS's authority model is IAM, whose defining rule is that an explicit
+**What the AWS slice tests.** AWS's authority model is IAM, whose defining rule is that an explicit
 Deny overrides any Allow. So we test the boundary immediately outside a Strands agent's tool calls, on the Wealth
 Manager workload. The agent proposes portfolio actions across household accounts; ReDevOps composes three policy
 layers with AWS semantics — an organizational guardrail (SCP), the role's IAM policy, and the Mission grant — and
