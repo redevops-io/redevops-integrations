@@ -14,7 +14,7 @@ function-calling run in-process, and the only outbound calls are model calls, wh
 endpoint (a local proxy here). Azure Entra identity is represented as a policy object, not a live cloud call — so
 the governance semantics are exercised for real without an Azure subscription.
 
-**The differentiation for Azure is precise.** Semantic Kernel's strongest abstraction is function-calling: the
+**What the Azure slice tests.** Semantic Kernel's strongest abstraction is function-calling: the
 agent plans and invokes plugin functions. So we test the boundary *immediately outside* it. The agent will invoke
 `request_deploy(service, environment)` whenever it decides to — it has no notion of whether the target is
 *compliant* or the identity is *authorized*. ReDevOps admits the deployment only when every required compliance

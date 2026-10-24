@@ -9,7 +9,7 @@
 This follows the reference template: **reference implementation → benchmark evidence → architecture → reproducible
 example.** It is framed as *conformance + incremental runtime value*, never a "ADK vs ReDevOps" scorecard.
 
-**The differentiation for Google is precise, and distinct from the single-hop CrewAI slice.** ADK / A2A's strongest
+**What the Google slice tests (a multi-hop mesh, unlike the single-hop CrewAI slice).** ADK / A2A's strongest
 abstraction is agent-to-agent delegation across service boundaries — an agent hands a task to another agent, which
 may hand it on again. Two failures are unique to a *multi-hop mesh*: **transitive authority escalation** (a 3rd-hop
 agent doing what an intermediate hop was never authorized for) and **loss of provenance** (a coordinator
