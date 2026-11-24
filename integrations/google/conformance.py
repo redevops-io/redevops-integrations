@@ -28,7 +28,7 @@ def go_d_no_reamplification():
     return Finding("GO-D no capability re-amplification", "regained_dropped_grant",
                    native="(a downstream agent runs with its own declared capabilities)",
                    with_redevops="intersection of the whole chain",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="hop C re-declares a grant dropped at hop B, but effective authority stays the chain "
                         "intersection {x,y} — the grant cannot be re-amplified downstream")
 
@@ -44,7 +44,7 @@ def go_e_telemetry():
         and tree["children"][0]["children"][0]["kind"] == "agent"
     return Finding("GO-E telemetry nesting", "mission_is_root", native="(the coordinator trace is the root)",
                    with_redevops="mission→coordinator→agent→model",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="ADK delegated-agent spans nest beneath the Mission causal node across the mesh")
 
 
@@ -76,7 +76,7 @@ def main():
 
     print("\n" + "=" * 78)
     print("result classification tally (framework: google-adk):")
-    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG"):
+    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG", "RUNTIME_PROPERTY"):
         if tally.get(k):
             print(f"  {k:36} {tally[k]}")
     print("=" * 78)

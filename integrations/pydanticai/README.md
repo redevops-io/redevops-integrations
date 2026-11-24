@@ -61,7 +61,7 @@ PA-D           4 schema-valid outputs the runtime refuses to act on (unsupported
 PA-E SciFact   verification accuracy naive 0.800 → closure 0.867 · evidence recall 0.841 → 0.877
                selective autonomy 0.889 @ 90% coverage
 PA-B telemetry mission → agent → model (Mission is the causal root)
-conformance    12 REDEVOPS_DELTA · 1 PARITY · 1 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG
+conformance    11 REDEVOPS_DELTA · 1 PARITY · 1 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG · 1 RUNTIME_PROPERTY (checked without running the framework; not a comparison)
 ```
 
 **Honesty line:** PA-D is deterministic and decisive — the two layers are provably orthogonal. PA-E's closure gain

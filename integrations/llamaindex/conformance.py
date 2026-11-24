@@ -38,7 +38,7 @@ def li_e_telemetry():
         and tree["children"][0]["children"][0]["kind"] == "model"
     return Finding("LI-E telemetry nesting", "mission_is_root", native="(the retriever trace is the root)",
                    with_redevops="mission→retriever→embed",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="LlamaIndex retriever/embedding spans nest beneath the Mission causal node")
 
 
@@ -70,7 +70,7 @@ def main():
 
     print("\n" + "=" * 78)
     print("result classification tally (framework: llama-index):")
-    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG"):
+    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG", "RUNTIME_PROPERTY"):
         if tally.get(k):
             print(f"  {k:36} {tally[k]}")
     print("=" * 78)

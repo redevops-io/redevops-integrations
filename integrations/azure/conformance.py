@@ -29,7 +29,7 @@ def az_c_deny_wins():
     return Finding("AZ-C deny-wins over Entra", "effective_authority",
                    native="(a permissive framework grant would allow production)",
                    with_redevops="staging only (intersection)",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="effective authority is the intersection of the framework grant and the Entra role; a "
                         "fully-compliant production deploy is still denied because the role does not permit prod")
 
@@ -45,7 +45,7 @@ def az_e_telemetry():
         and tree["children"][0]["children"][0]["kind"] == "tool"
     return Finding("AZ-E telemetry nesting", "mission_is_root", native="(the SK agent trace is the root)",
                    with_redevops="mission→agent→function→model",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="Semantic Kernel agent/function/model spans nest beneath the Mission causal node")
 
 
@@ -75,7 +75,7 @@ def main():
 
     print("\n" + "=" * 78)
     print("result classification tally (framework: semantic-kernel):")
-    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG"):
+    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG", "RUNTIME_PROPERTY"):
         if tally.get(k):
             print(f"  {k:36} {tally[k]}")
     print("=" * 78)

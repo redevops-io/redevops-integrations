@@ -19,4 +19,4 @@ jobs:
       - name: Scorer unit tests
         run: |
           pip install pytest pyyaml
-          python -m pytest -q workloads/code_retrieval/test_scoring.py
+          python -m pytest -q workloads/code_retrieval/test_scoring.py tests/test_conformance_tally.py

@@ -57,7 +57,7 @@ NV-A SciFact   verification accuracy naive 0.800 → closure 0.867 · evidence r
 NV-B GDPR      content-only 0.412 → composed (content+graph) 0.913 · seed-only 0.000 → 0.913
 NV-D governed  0 unauthorized · 0 side-effects before approval · exactly 1 after · 0 duplicates on replay
 NV-E telemetry mission → agent → model (Mission is the causal root)
-conformance    10 REDEVOPS_DELTA · 1 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG
+conformance    9 REDEVOPS_DELTA · 1 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG · 1 RUNTIME_PROPERTY (checked without running the framework; not a comparison)
 ```
 
 **Honesty line:** SciFact is already content-saturated, so the closure gain is modest (+0.067); GDPR is

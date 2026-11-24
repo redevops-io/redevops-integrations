@@ -5,10 +5,10 @@ framework or managed cloud stack, without replacing it. Implements the two bluep
 (`REDEVOPS_OPEN_AGENT_FRAMEWORKS_END_TO_END_PLAN_v2.md`, `REDEVOPS_HYPERSCALER_END_TO_END_REFERENCE_IMPLEMENTATIONS_v2.md`).
 
 - **`common/`** — provider-neutral harness reused by every integration: the result-classification enum
-  (`PARITY / FRAMEWORK_NATIVE_ADVANTAGE / REDEVOPS_DELTA / EXPECTED_IMPLEMENTATION_DIFFERENCE / BUG`), the
+  (`PARITY / FRAMEWORK_NATIVE_ADVANTAGE / REDEVOPS_DELTA / EXPECTED_IMPLEMENTATION_DIFFERENCE / BUG`, plus `RUNTIME_PROPERTY` for checks that run no framework), the
   **Workflow Adapter Contract** (`adapter.py`), and the reproducibility **AcceptanceBundle** (`bundle.py`).
 - **`nvidia/`** — **DONE.** NeMo Agent Toolkit × ReDevOps on SciFact + GDPR Closure Resolution + governed tool.
-  Real `nvidia-nat` agent; 10 REDEVOPS_DELTA / 1 EXPECTED_IMPLEMENTATION_DIFFERENCE / 0 BUG. See `nvidia/README.md`.
+  Real `nvidia-nat` agent; 9 REDEVOPS_DELTA / 1 EXPECTED_IMPLEMENTATION_DIFFERENCE / 0 BUG, plus 1 RUNTIME_PROPERTY (checked without running the framework). See `nvidia/README.md`.
 
 Planned next (same `common/` contract, so each is a conformance exercise): PydanticAI (RAAAL verified-intent),
 LlamaIndex Workflows (long-context + code closure), CrewAI (multi-agent business workflow); then the hyperscaler

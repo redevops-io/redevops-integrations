@@ -30,7 +30,7 @@ def aw_d_explicit_deny_precedence():
     return Finding("AW-D explicit-deny precedence", "deny_overrides_allow",
                    native="(a permissive allow would let the action through)",
                    with_redevops="explicit Deny wins",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="a broad Allow on portfolio:* is overridden by an explicit Deny on the restricted resource; "
                         "an unlisted action is an implicit deny")
 
@@ -45,7 +45,7 @@ def aw_e_telemetry():
         and tree["children"][0]["children"][0]["kind"] == "model"
     return Finding("AW-E telemetry nesting", "mission_is_root", native="(the Strands agent trace is the root)",
                    with_redevops="mission→agent→model",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="Strands agent/model spans nest beneath the Mission causal node")
 
 
@@ -77,7 +77,7 @@ def main():
 
     print("\n" + "=" * 78)
     print("result classification tally (framework: strands-agents):")
-    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG"):
+    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG", "RUNTIME_PROPERTY"):
         if tally.get(k):
             print(f"  {k:36} {tally[k]}")
     print("=" * 78)
