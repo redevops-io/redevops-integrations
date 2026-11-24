@@ -1,7 +1,7 @@
 {
   "framework": "crewai",
-  "framework_version": "1.15.18",
-  "adapter_commit": "16060d4",
+  "framework_version": "1.15.44",
+  "adapter_commit": "fcccb7e",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},

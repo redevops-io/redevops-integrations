@@ -1,7 +1,7 @@
 {
   "framework": "semantic-kernel",
   "framework_version": "1.36.0",
-  "adapter_commit": "8775334",
+  "adapter_commit": "fcccb7e",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},

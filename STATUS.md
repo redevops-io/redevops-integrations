@@ -6,7 +6,7 @@
 | Version | none: no tags or releases |
 | Last git activity | 2026-10-13 (`git log -1 --format=%cs`; clone is shallow) |
 | Activity | active: 8 commits between 2026-07-15 and 2026-10-15 (GitHub API) |
-| Mission SDK pin | `redevops-mission@v0.3.4` in `requirements.txt`; latest `mission-sdk` tag is `v0.3.7` (`git ls-remote --tags`, 2026-10-15) |
+| Mission SDK pin | `redevops-mission@v0.3.9` in `requirements.txt` (the latest `mission-sdk` tag, 2026-11-24; it pins kernel `agentic-os` `v0.4.2`). Re-run on it on 2026-11-24 with unchanged findings: the governed examples of aws, azure, digitalocean, google and crewai (CrewAI 1.15.44). Not re-run: nvidia and pydanticai (they call a model and need its key), llamaindex (needs `redevops_rag`, not in `requirements.txt`). The other bundles were produced on an older SDK and say so only through their `adapter_commit` |
 | Licence | Apache-2.0 (`LICENSE`) |
 
 ## Supported

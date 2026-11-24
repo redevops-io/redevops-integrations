@@ -1,7 +1,7 @@
 {
   "framework": "strands-agents",
   "framework_version": "1.54.0",
-  "adapter_commit": "3cf966e",
+  "adapter_commit": "fcccb7e",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},
