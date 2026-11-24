@@ -60,7 +60,7 @@ GO-B governed action    0 unauthorized · 0 before approval · exactly 1 after �
 GO-C real ADK mesh      4/4 sub-questions answered end-to-end · 4/4 findings provenance-attributable
 GO-D no re-amplification a grant dropped at an intermediate hop stays dropped (chain intersection)
 GO-E telemetry          mission → coordinator → agent → model (Mission is the causal root)
-conformance             9 REDEVOPS_DELTA · 2 PARITY · 0 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG
+conformance             7 REDEVOPS_DELTA · 2 PARITY · 0 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG · 2 RUNTIME_PROPERTY (checked without running the framework; not a comparison)
 ```
 
 **Honesty line:** GO-A is deterministic — chain-wide attenuation and provenance are mechanisms, not model

@@ -32,7 +32,7 @@ def cr_d_no_pooling():
     ok = a_denied and b_denied and b_cannot_borrow and not sink
     return Finding("CR-D no authority pooling", "pooled_or_borrowed_authority",
                    native="(a crew of agents can collectively call any tool any member holds)", with_redevops=len(sink),
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="authority is per-agent-envelope, never summed across the crew nor borrowed between agents; "
                         f"A2 holds account:freeze but B still cannot use it")
 
@@ -48,7 +48,7 @@ def cr_e_telemetry():
         and tree["children"][0]["children"][0]["kind"] == "agent"
     return Finding("CR-E telemetry nesting", "mission_is_root", native="(the crew trace is the root)",
                    with_redevops="mission→crew→agent→model",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="CrewAI crew/agent/model spans nest beneath the Mission causal node")
 
 
@@ -80,7 +80,7 @@ def main():
 
     print("\n" + "=" * 78)
     print("result classification tally (framework: crewai):")
-    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG"):
+    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG", "RUNTIME_PROPERTY"):
         if tally.get(k):
             print(f"  {k:36} {tally[k]}")
     print("=" * 78)

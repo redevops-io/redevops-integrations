@@ -58,7 +58,7 @@ AW-B shadow+promote     500 households shadowed with 0 real side effects · prom
 AW-C real agent         4/4 scenarios proposed · the 'withdraw all cash' proposal denied by the SCP guardrail
 AW-D explicit deny      a broad Allow on portfolio:* is overridden by an explicit Deny (implicit deny on unlisted)
 AW-E telemetry          mission → agent → model (Mission is the causal root)
-conformance             8 REDEVOPS_DELTA · 2 PARITY · 0 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG
+conformance             6 REDEVOPS_DELTA · 2 PARITY · 0 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG · 2 RUNTIME_PROPERTY (checked without running the framework; not a comparison)
 ```
 
 **Honesty line:** the composed-policy evaluation is deterministic (real IAM/SCP semantics), and the value is the

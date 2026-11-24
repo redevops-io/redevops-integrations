@@ -27,7 +27,7 @@ def do_d_cache_isolation():
     return Finding("DO-D tenant-scoped cache keys", "cross_tenant_cache_bleed",
                    native="(a shared cache key returns one tenant's answer to another)",
                    with_redevops="tenant-namespaced keys",
-                   classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="the same question from two apps yields distinct cache keys "
                         f"({a.cache_key(same_question)} vs {b.cache_key(same_question)}) — no cross-tenant bleed")
 
@@ -41,7 +41,7 @@ def do_e_telemetry():
     ok = tree["kind"] == "workflow_step" and all(c["kind"] == "agent" for c in tree["children"]) \
         and tree["children"][0]["children"][0]["kind"] == "model"
     return Finding("DO-E telemetry nesting", "mission_is_root", native="(each app trace is its own root)",
-                   with_redevops="mission→{app}→model", classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   with_redevops="mission→{app}→model", classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="every tenant app's agent/model spans nest beneath the one shared-Runtime Mission node")
 
 
@@ -73,7 +73,7 @@ def main():
 
     print("\n" + "=" * 78)
     print("result classification tally (framework: digitalocean-genai):")
-    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG"):
+    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG", "RUNTIME_PROPERTY"):
         if tally.get(k):
             print(f"  {k:36} {tally[k]}")
     print("=" * 78)

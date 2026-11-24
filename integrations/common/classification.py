@@ -1,7 +1,8 @@
 """Common result classification for every framework/cloud integration (both plans, Section 4).
 
 This exists so an integration benchmark is a CONFORMANCE exercise, not a marketing scorecard. Every measured
-comparison of `framework-native` vs `framework + ReDevOps` is classified into one of five buckets.
+comparison of `framework-native` vs `framework + ReDevOps` is classified into one of five buckets. A check that runs no framework at all is
+not a comparison: it is a `RUNTIME_PROPERTY` and is tallied separately.
 """
 from __future__ import annotations
 
@@ -15,6 +16,9 @@ class ResultClass(str, enum.Enum):
     REDEVOPS_DELTA = "REDEVOPS_DELTA"                   # ReDevOps adds a measurable guarantee / optimization
     EXPECTED_IMPLEMENTATION_DIFFERENCE = "EXPECTED_IMPLEMENTATION_DIFFERENCE"  # syntax/latency differ, semantics hold
     BUG = "BUG"                                         # unexplained semantic divergence
+    # A property of the ReDevOps component checked BY ITSELF: no framework was run, so it is not a comparison and is never counted with the five
+    # classes above. Used for the deterministic rule checks and the span-nesting checks a conformance script builds by hand.
+    RUNTIME_PROPERTY = "RUNTIME_PROPERTY"
 
 
 @dataclass

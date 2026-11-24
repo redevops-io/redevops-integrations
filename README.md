@@ -65,7 +65,9 @@ result digest) — these are committed, so the measured evidence is public even 
 ## Result classification
 
 Every comparison is one of: `PARITY` · `FRAMEWORK_NATIVE_ADVANTAGE` · `REDEVOPS_DELTA` ·
-`EXPECTED_IMPLEMENTATION_DIFFERENCE` · `BUG` (`integrations/common/classification.py`). The point is a faithful
+`EXPECTED_IMPLEMENTATION_DIFFERENCE` · `BUG` (`integrations/common/classification.py`). A check that runs no framework
+(a rule of the runtime exercised alone, or the shape of a span tree) is a `RUNTIME_PROPERTY`: it is tallied separately
+and is not a comparison. The point is a faithful
 map of where the runtime adds value, not a leaderboard.
 
 ## Setup

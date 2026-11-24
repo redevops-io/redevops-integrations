@@ -58,7 +58,7 @@ CR-B governed action        0 unauthorized · 0 before approval · exactly 1 aft
 CR-C real crew (n=6)        crew decision accuracy 1.000, wrapped as a Mission (ReDevOps preserves the decision)
 CR-D no authority pooling   a crew of low-authority agents cannot sum to a grant none of them hold
 CR-E telemetry              mission → crew → agent → model (Mission is the causal root)
-conformance                 7 REDEVOPS_DELTA · 2 PARITY · 1 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG
+conformance                 5 REDEVOPS_DELTA · 2 PARITY · 1 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG · 2 RUNTIME_PROPERTY (checked without running the framework; not a comparison)
 ```
 
 **Honesty line:** CR-A is deterministic and decisive — authority narrowing is a mechanism, not a model behaviour.

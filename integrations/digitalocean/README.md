@@ -55,7 +55,7 @@ DO-B governed action    0 unauthorized · 0 before approval · exactly 1 after �
 DO-C three real apps    telegrambot + nutrients + vibexgen ran on one runtime · 3/3 tenant-isolated
 DO-D cache isolation    the same question from two apps yields distinct cache keys (no cross-tenant bleed)
 DO-E telemetry          mission → {app} → model (the one shared Mission is the causal root)
-conformance             9 REDEVOPS_DELTA · 2 PARITY · 0 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG
+conformance             7 REDEVOPS_DELTA · 2 PARITY · 0 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG · 2 RUNTIME_PROPERTY (checked without running the framework; not a comparison)
 ```
 
 **Honesty line:** the isolation and cache-key mechanics are deterministic — the value is the enforced boundary.

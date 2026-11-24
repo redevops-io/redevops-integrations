@@ -63,7 +63,7 @@ AZ-A compliance gate    native runs 3/3 non-compliant/unauthorized deploys · Re
 AZ-B governed deploy    0 unauthorized · 0 before approval · exactly 1 after · 0 duplicates on replay
 AZ-C deny-wins          framework grant {staging,production} ∩ Entra {staging} = staging; prod denied though compliant
 AZ-E telemetry          mission → agent → function → model (Mission is the causal root)
-conformance             7 REDEVOPS_DELTA · 1 PARITY · 0 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG
+conformance             5 REDEVOPS_DELTA · 1 PARITY · 0 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG · 2 RUNTIME_PROPERTY (checked without running the framework; not a comparison)
 ```
 
 **Honesty line:** AZ-A's compliance/authority gate is deterministic — the value is the enforced mechanism, not a

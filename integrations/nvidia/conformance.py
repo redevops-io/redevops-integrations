@@ -26,7 +26,7 @@ def nv_e_telemetry():
     ok = tree["kind"] == "workflow_step" and tree["children"][0]["kind"] == "agent" \
         and tree["children"][0]["children"][0]["kind"] == "model"
     return Finding("NV-E telemetry nesting", "mission_is_root", native="(agent trace is the root)",
-                   with_redevops="mission→agent→model", classification=ResultClass.REDEVOPS_DELTA if ok else ResultClass.BUG,
+                   with_redevops="mission→agent→model", classification=ResultClass.RUNTIME_PROPERTY if ok else ResultClass.BUG,
                    note="NeMo model/tool spans nest beneath the Mission causal node")
 
 
@@ -69,7 +69,7 @@ def main():
     cap = NemoAgentCapability(system="x")
     print("\n" + "=" * 78)
     print(f"result classification tally (framework: {cap.framework} {cap.framework_version}):")
-    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG"):
+    for k in ("REDEVOPS_DELTA", "PARITY", "FRAMEWORK_NATIVE_ADVANTAGE", "EXPECTED_IMPLEMENTATION_DIFFERENCE", "BUG", "RUNTIME_PROPERTY"):
         if tally.get(k):
             print(f"  {k:36} {tally[k]}")
     print("=" * 78)

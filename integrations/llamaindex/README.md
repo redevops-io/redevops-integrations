@@ -59,7 +59,7 @@ LI-B long-context   query-engine accuracy: needle retrieved 1.000 · needle miss
                     on a miss 4/6 confidently answered → ReDevOps abstains 6/6 · selective accuracy 1.000 @ 50%
 LI-D governed       0 unauthorized · 0 before approval · exactly 1 after · 0 duplicates on replay
 LI-E telemetry      mission → retriever → embed (Mission is the causal root)
-conformance         10 REDEVOPS_DELTA · 1 PARITY · 1 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG
+conformance         9 REDEVOPS_DELTA · 1 PARITY · 1 EXPECTED_IMPLEMENTATION_DIFFERENCE · 0 BUG · 1 RUNTIME_PROPERTY (checked without running the framework; not a comparison)
 ```
 
 **Honesty line:** LI-A's flagship result is real and modest — semantic retrieval recovers the seed and type edges
