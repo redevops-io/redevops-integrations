@@ -48,9 +48,31 @@ def _operators():
     ])]
 
 
+class NotRun(Exception):
+    """The example could not be carried out, so it has no findings. Never a result."""
+
+
+def _preflight() -> None:
+    """One real call to the agent before anything is measured. If the model cannot be reached (no key, a 401, no network) the run stops
+    here: every finding below is about what the runtime does AROUND a working agent, and with a dead agent "0 side effects" would be true for
+    the wrong reason."""
+    try:
+        out = nemo.invoke("draft", {"prompt": "Reply with the single word: ready"})
+    except Exception as e:  # noqa: BLE001
+        raise NotRun(f"the NeMo agent could not reach its model ({type(e).__name__}: {str(e)[:160]})") from None
+    if not str(out.get("answer") or "").strip():
+        raise NotRun("the NeMo agent returned an empty answer")
+
+
 def main():
+    try:
+        _preflight()
+    except NotRun as e:
+        print(f"NV-D governed tool — NOT RUN: {e}\nNo findings were produced and no bundle was written. "
+              "Set OPENAI_API_KEY (and OPENAI_BASE_URL / CR_OPENAI_MODEL for another OpenAI-compatible endpoint).", file=sys.stderr)
+        return 2
     b = AcceptanceBundle(framework=nemo.framework, framework_version=nemo.framework_version,
-                         model_ids=[nemo.model_id])
+                         model_ids=[os.environ.get("CR_OPENAI_MODEL") or nemo.model_id])
     SIDE_EFFECTS.clear()
 
     # 1) MISSING AUTHORITY — publish requires publish:external, which we do NOT grant. Must refuse, 0 effects.
@@ -73,7 +95,11 @@ def main():
     prog = MissionProgram.from_template("governed_publish", goal="draft + publish", grants=["publish:external"])
     ops = _operators()
     r1 = run_program(prog, ops)
-    held = (r1.state == "waiting_human") and len(SIDE_EFFECTS) == 0
+    if r1.state != "waiting_human":
+        # The draft step did not complete, so the mission never reached the gate: nothing about the gate was observed.
+        print(f"NV-D governed tool — NOT RUN: the mission ended {r1.state!r} before the approval gate (the agent step failed).", file=sys.stderr)
+        return 2
+    held = len(SIDE_EFFECTS) == 0
     b.add(Finding("NV-D approval-hold", "side_effects_before_approval", native="(no HITL gate)",
                   with_redevops=len(SIDE_EFFECTS),
                   classification=ResultClass.REDEVOPS_DELTA if held else ResultClass.BUG,
@@ -90,14 +116,17 @@ def main():
     before = len(SIDE_EFFECTS)
     try:
         bundle = export_bundle(prog, ops, ledger_path="/tmp/nvd_ledger.ndjson")
-        rep = replay_bundle(bundle)
+        before = len(SIDE_EFFECTS)                       # the export above re-ran the mission; count only what replay itself does
+        rep = replay_bundle(bundle, ops)
         dup = len(SIDE_EFFECTS) - before
-        consistent = getattr(rep, "consistent", getattr(rep, "integrity_ok", True))
-    except Exception as e:
-        dup, consistent = 0, f"replay-api:{type(e).__name__}"
+        consistent = bool(rep.consistent)
+    except Exception as e:  # noqa: BLE001
+        # A replay that could not be performed says nothing about duplicates. (It used to be scored as 0 duplicates.)
+        print(f"NV-D governed tool — NOT RUN: replay failed ({type(e).__name__}: {str(e)[:160]})", file=sys.stderr)
+        return 2
     b.add(Finding("NV-D replay", "duplicate_side_effects_on_replay",
                   native="(stateless re-run double-fires on every crash)", with_redevops=dup,
-                  classification=ResultClass.REDEVOPS_DELTA if dup == 0 else ResultClass.BUG,
+                  classification=ResultClass.REDEVOPS_DELTA if dup == 0 and consistent else ResultClass.BUG,
                   note=f"replay reconstructs from the event ledger, no re-execution (consistent={consistent})"))
 
     out = b.write(os.path.join(HERE, "..", "results", "nv_d_governed_tool.json"))
@@ -108,4 +137,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)

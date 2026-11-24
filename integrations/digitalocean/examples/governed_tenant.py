@@ -87,14 +87,17 @@ def main():
     before = len(PUBLISHED)
     try:
         bundle = export_bundle(prog, ops, ledger_path="/tmp/do_b_ledger.ndjson")
-        rep = replay_bundle(bundle)
+        before = len(PUBLISHED)          # the export above ran the mission again; count only what replay itself does
+        rep = replay_bundle(bundle, ops)
         dup = len(PUBLISHED) - before
-        consistent = getattr(rep, "consistent", getattr(rep, "integrity_ok", True))
-    except Exception as e:
-        dup, consistent = 0, f"replay-api:{type(e).__name__}"
+        consistent = bool(rep.consistent)
+    except Exception as e:  # noqa: BLE001
+        # A replay that could not be performed says nothing about duplicates. It used to be scored as "0 duplicates": every committed bundle
+        # carried `consistent=replay-api:TypeError`, because replay_bundle was called without the operators it needs.
+        raise SystemExit(f"NOT RUN: replay failed ({type(e).__name__}: {str(e)[:160]}); no findings were written") from None
     b.add(Finding("DO-B replay", "duplicate_side_effects_on_replay",
                   native="(a stateless re-run re-publishes on every crash)", with_redevops=dup,
-                  classification=ResultClass.REDEVOPS_DELTA if dup == 0 else ResultClass.BUG,
+                  classification=ResultClass.REDEVOPS_DELTA if (dup == 0) and consistent else ResultClass.BUG,
                   note=f"replay reconstructs from the event ledger, no re-execution (consistent={consistent})"))
 
     out = b.write(os.path.join(HERE, "..", "results", "do_b_governed_tenant.json"))

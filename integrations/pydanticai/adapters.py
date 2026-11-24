@@ -39,7 +39,10 @@ class PydanticAgentCapability:
     framework_version = PA_VERSION
 
     def __init__(self, output_type: type[BaseModel], *, system_prompt: str,
-                 model: str = "openai:gpt-4o-mini", name: str = "pydantic_agent"):
+                 model: str | None = None, name: str = "pydantic_agent"):
+        # The model is whatever the OpenAI-compatible endpoint in the environment serves (OPENAI_BASE_URL / OPENAI_API_KEY / CR_OPENAI_MODEL),
+        # so the same example runs against a hosted model or a local one, and the bundle records the one that was really used.
+        model = model or "openai:" + os.environ.get("CR_OPENAI_MODEL", "gpt-4o-mini")
         self._agent = Agent(model, output_type=output_type, system_prompt=system_prompt)
         self._output_type = output_type
         self._name = name

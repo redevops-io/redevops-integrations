@@ -13,8 +13,8 @@ a2a-sdk                  #   "
 strands-agents           # AWS Strands Agents         (integrations/aws)
 openai                   # DigitalOcean GenAI (OpenAI-compatible) + shared LLM helper
 
-# integrations/llamaindex/examples/governed_retrieval.py also imports `redevops_rag` (github.com/redevops-io/redevops-rag), which is not
-# listed here: install it from a checkout of that repository before running that example.
+# Retrieval primitives used by integrations/llamaindex (embedder, closure retrieval):
+redevops-rag @ git+https://github.com/redevops-io/redevops-rag@v0.4.0
 
 # Local embeddings for the closure/retrieval slices (nvidia, pydanticai, llamaindex):
 sentence-transformers

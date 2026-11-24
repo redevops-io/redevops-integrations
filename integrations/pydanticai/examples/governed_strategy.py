@@ -82,7 +82,7 @@ def main():
     print(f"PA-A — pydantic-ai typed intent: action={intent.action} instrument={intent.instrument} "
           f"conf={intent.confidence}")
     _tmpl, ops = _mission(intent)
-    b = AcceptanceBundle(framework="pydantic-ai", framework_version=PA_VERSION, model_ids=["gpt-4o-mini"],
+    b = AcceptanceBundle(framework="pydantic-ai", framework_version=PA_VERSION, model_ids=[os.environ.get("CR_OPENAI_MODEL", "gpt-4o-mini")],
                          config={"experiment": "PA-A/PA-C governed-intent + typed replay"})
 
     # 1) MISSING AUTHORITY — execute needs portfolio:rebalance, not granted. Must refuse, 0 effects.
@@ -122,14 +122,17 @@ def main():
     before = len(SIDE_EFFECTS)
     try:
         bundle = export_bundle(prog, ops, ledger_path="/tmp/pa_a_ledger.ndjson")
-        rep = replay_bundle(bundle)
+        before = len(SIDE_EFFECTS)          # the export above ran the mission again; count only what replay itself does
+        rep = replay_bundle(bundle, ops)
         dup = len(SIDE_EFFECTS) - before
-        consistent = getattr(rep, "consistent", getattr(rep, "integrity_ok", True))
-    except Exception as e:
-        dup, consistent = 0, f"replay-api:{type(e).__name__}"
+        consistent = bool(rep.consistent)
+    except Exception as e:  # noqa: BLE001
+        # A replay that could not be performed says nothing about duplicates. It used to be scored as "0 duplicates": every committed bundle
+        # carried `consistent=replay-api:TypeError`, because replay_bundle was called without the operators it needs.
+        raise SystemExit(f"NOT RUN: replay failed ({type(e).__name__}: {str(e)[:160]}); no findings were written") from None
     # the typed intent reconstructs to the same content hash (typed state is deterministic under replay)
     hash_after = PydanticStateProjection.hash(StrategyIntent.model_validate(intent.model_dump()))
-    typed_ok = (hash_before == hash_after) and dup == 0
+    typed_ok = (hash_before == hash_after) and dup == 0 and consistent
     b.add(Finding("PA-C typed-state replay", "duplicate_side_effects_on_replay",
                   native="(stateless re-run re-executes the strategy)", with_redevops=dup,
                   classification=ResultClass.REDEVOPS_DELTA if typed_ok else ResultClass.BUG,
