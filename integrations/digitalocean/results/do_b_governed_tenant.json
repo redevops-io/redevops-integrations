@@ -1,7 +1,7 @@
 {
   "framework": "digitalocean-genai",
   "framework_version": "openai-compatible/v1",
-  "adapter_commit": "d09736c",
+  "adapter_commit": "fcccb7e",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},

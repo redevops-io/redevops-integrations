@@ -1,7 +1,7 @@
 {
   "framework": "google-adk",
   "framework_version": "2.8.0",
-  "adapter_commit": "ecc916b",
+  "adapter_commit": "fcccb7e",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},

@@ -1,7 +1,7 @@
 # ReDevOps integrations — the shared runtime boundary + per-framework SDKs.
 #
 # The Mission SDK is the one required dependency for every slice:
-redevops-mission @ git+https://github.com/redevops-io/mission-sdk@v0.3.4
+redevops-mission @ git+https://github.com/redevops-io/mission-sdk@v0.3.9
 
 # Framework SDKs (install the ones for the slices you want to run):
 nvidia-nat               # NVIDIA NeMo Agent Toolkit  (integrations/nvidia)
@@ -12,6 +12,9 @@ google-adk[extensions]   # Google ADK / A2A           (integrations/google)
 a2a-sdk                  #   "
 strands-agents           # AWS Strands Agents         (integrations/aws)
 openai                   # DigitalOcean GenAI (OpenAI-compatible) + shared LLM helper
+
+# integrations/llamaindex/examples/governed_retrieval.py also imports `redevops_rag` (github.com/redevops-io/redevops-rag), which is not
+# listed here: install it from a checkout of that repository before running that example.
 
 # Local embeddings for the closure/retrieval slices (nvidia, pydanticai, llamaindex):
 sentence-transformers
