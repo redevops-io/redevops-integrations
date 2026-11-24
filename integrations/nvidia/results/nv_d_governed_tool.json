@@ -1,12 +1,12 @@
 {
   "framework": "nvidia-nemo-agent-toolkit",
   "framework_version": "1.8.0",
-  "adapter_commit": "0503d23",
+  "adapter_commit": "f690579",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},
   "model_ids": [
-    "gpt-4o-mini"
+    "Qwen3.6-35B-A3B"
   ],
   "config": {},
   "findings": [
@@ -40,9 +40,9 @@
       "native": "(stateless re-run double-fires on every crash)",
       "with_redevops": 0,
       "classification": "REDEVOPS_DELTA",
-      "note": "replay reconstructs from the event ledger, no re-execution (consistent=replay-api:TypeError)"
+      "note": "replay reconstructs from the event ledger, no re-execution (consistent=True)"
     }
   ],
   "tests": {},
-  "result_digest": "sha256:05aaad5650a6cb77"
+  "result_digest": "sha256:857ea9f2e16c81cd"
 }

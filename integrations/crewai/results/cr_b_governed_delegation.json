@@ -1,7 +1,7 @@
 {
   "framework": "crewai",
   "framework_version": "1.15.44",
-  "adapter_commit": "fcccb7e",
+  "adapter_commit": "2c98a96",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},
@@ -40,9 +40,9 @@
       "native": "(a stateless crew re-run re-freezes on every crash)",
       "with_redevops": 0,
       "classification": "REDEVOPS_DELTA",
-      "note": "replay reconstructs from the event ledger, no re-execution (consistent=replay-api:TypeError)"
+      "note": "replay reconstructs from the event ledger, no re-execution (consistent=True)"
     }
   ],
   "tests": {},
-  "result_digest": "sha256:ef142fad45ba87e1"
+  "result_digest": "sha256:8c65dd5d10361079"
 }

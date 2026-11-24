@@ -20,3 +20,35 @@ jobs:
         run: |
           pip install pytest pyyaml
           python -m pytest -q workloads/code_retrieval/test_scoring.py tests/test_conformance_tally.py
+
+  framework-integrations:
+    # Runs slice examples FOR REAL: the framework SDK is installed and imported, the mission runs, the approval gate holds, the approved action
+    # fires once and the sealed run is replayed. Findings must equal the committed bundles. Only examples that need no model key run here;
+    # the model-backed ones (nvidia, pydanticai) fail closed without a key and are run by hand (see STATUS.md).
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the Mission SDK at the pinned tag and the frameworks under test
+        run: |
+          grep -E '^redevops-mission @' requirements.txt > /tmp/sdk.txt
+          pip install -r /tmp/sdk.txt "crewai==1.15.44"
+      - name: CrewAI (real crew objects) and the four cloud slices
+        run: |
+          python tools/run_examples.py \
+            integrations/crewai/examples/governed_delegation.py \
+            integrations/aws/examples/shadow_promotion.py \
+            integrations/azure/examples/governed_deploy.py \
+            integrations/digitalocean/examples/governed_tenant.py \
+            integrations/google/examples/governed_research.py
+      - name: A model-backed example without a key refuses to report findings
+        run: |
+          pip install "nvidia-nat==1.6.0"
+          cd integrations/nvidia/examples
+          set +e; python governed_tool.py; code=$?; set -e
+          test "$code" = 2 || { echo "expected exit 2 (NOT RUN) without a model key, got $code"; exit 1; }
+          git diff --exit-code -- ../results/nv_d_governed_tool.json
+

@@ -1,12 +1,12 @@
 {
   "framework": "pydantic-ai",
-  "framework_version": "2.36.0",
-  "adapter_commit": "0997d46",
+  "framework_version": "2.31.1",
+  "adapter_commit": "f690579",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},
   "model_ids": [
-    "gpt-4o-mini"
+    "Qwen3.6-35B-A3B"
   ],
   "config": {
     "experiment": "PA-A/PA-C governed-intent + typed replay"
@@ -42,9 +42,9 @@
       "native": "(stateless re-run re-executes the strategy)",
       "with_redevops": 0,
       "classification": "REDEVOPS_DELTA",
-      "note": "typed state hash sha256:a5e9b90af816db3a == sha256:a5e9b90af816db3a; replay from ledger, no re-exec (consistent=replay-api:TypeError)"
+      "note": "typed state hash sha256:3591c83f52ae2702 == sha256:3591c83f52ae2702; replay from ledger, no re-exec (consistent=True)"
     }
   ],
   "tests": {},
-  "result_digest": "sha256:11a09227977c34e1"
+  "result_digest": "sha256:fbf09699ed7093be"
 }

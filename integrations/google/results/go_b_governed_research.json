@@ -1,7 +1,7 @@
 {
   "framework": "google-adk",
   "framework_version": "2.8.0",
-  "adapter_commit": "fcccb7e",
+  "adapter_commit": "2c98a96",
   "mission_sdk_version": "",
   "context_runtime_version": "",
   "dataset_hashes": {},
@@ -40,9 +40,9 @@
       "native": "(a stateless mesh re-run re-writes on every crash)",
       "with_redevops": 0,
       "classification": "REDEVOPS_DELTA",
-      "note": "replay reconstructs from the event ledger, no re-execution (consistent=replay-api:TypeError)"
+      "note": "replay reconstructs from the event ledger, no re-execution (consistent=True)"
     }
   ],
   "tests": {},
-  "result_digest": "sha256:c9f862cafb10017d"
+  "result_digest": "sha256:534fdf6596e8585d"
 }

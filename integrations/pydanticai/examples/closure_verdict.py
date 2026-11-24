@@ -110,7 +110,7 @@ def main():
     cov = len(auto) / len(sample)
     routed = [ok for ok, ag in zip(closure_ok, agree) if not ag]
 
-    b = AcceptanceBundle(framework="pydantic-ai", framework_version=PA_VERSION, model_ids=["gpt-4o-mini"],
+    b = AcceptanceBundle(framework="pydantic-ai", framework_version=PA_VERSION, model_ids=[os.environ.get("CR_OPENAI_MODEL", "gpt-4o-mini")],
                          dataset_hashes={"scifact": "allenai/scifact"},
                          config={"domain": "scifact", "budget": BUDGET, "n": len(sample)})
     b.add(Finding("PA-E verification accuracy", "task_accuracy", native=round(na, 3), with_redevops=round(ca, 3),
