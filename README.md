@@ -33,7 +33,7 @@ cd integrations/crewai && python conformance.py     # prints the slice's classif
 framework version, model ids, per-finding classification, result digest). Label: **Internally reproduced** (not re-run for this README).
 Spot check: `nv_b_gdpr_structural.json` contains 0.913 and `li_a_code_closure.json` contains 0.693.
 
-**Limitations.** Version pin: `requirements.txt` pins `redevops-mission@v0.3.9`, the latest `mission-sdk` tag (2026-11-24). All eight governed examples
+**Limitations.** Version pin: `requirements.txt` pins `redevops-mission@v0.3.10`, the latest `mission-sdk` tag (2026-11-24). All eight governed examples
 were re-run on it (see [STATUS.md](STATUS.md)); the other bundles were produced on an older SDK, and a bundle does not record the SDK version.
 A run without the model key a slice needs is not a result: the model-backed examples stop with `NOT RUN` (exit 2) and write no bundle.
 Until 2026-11-24 the `replay` finding of the governed examples was scored without a replay having run (the call raised a `TypeError` that was counted as
